@@ -12,9 +12,21 @@ use App\SubjectTeacher;
 
 class SubjectTeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if($request->user()->type == 'superadmin'||$request->user()->type == 'admin') {
+                return $next($request);
+            } else {
+                return redirect('/');
+            }
+        });
+    }
+
     public function index()
     {
-
+        
     }
     public function selcet_section_form()
     {

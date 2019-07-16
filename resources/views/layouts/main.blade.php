@@ -21,13 +21,15 @@
     
     <!-- Argon Scripts -->
     <!-- Core -->
-    <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+    
     <script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <!-- Optional JS -->
     <script src="{{asset('assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
     <script src="{{asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
     <!-- Argon JS -->
     <script src="{{asset('assets/js/argon.js?v=1.0.0')}}"></script>
+
+    <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
     
  
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>

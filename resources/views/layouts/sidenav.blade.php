@@ -97,7 +97,12 @@
           @if (Auth::user()->type == 'superadmin'|| Auth::user()->type == 'admin')
             @include('admin.sidebar_admin')
           @endif
+
           @if (Auth::user()->type == 'teacher')
+            @include('teacher.sidebar_teacher')
+          @endif
+
+          @if (Auth::user()->type == 'student')
             @include('teacher.sidebar_teacher')
           @endif
         @endauth

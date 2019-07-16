@@ -34,11 +34,6 @@ class StudentController extends Controller
 
     public function add_student_form()
     {
-        $user = User::where('user_id','S-'. $request->teacher_id)->first();
-        if(!empty($user))
-        {
-            return redirect()->back()->withErrors('Teacher Alreadey added')->withInput();
-        }
 
         $data = (object)[
             'stu_name'=> chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
@@ -92,8 +87,11 @@ class StudentController extends Controller
 
     public function add_student(Request $request)
     {
-        // $student = new Student(); 
-        // return $student;
+        $user = User::where('user_id','S-'. $request->stu_roll)->first();
+        if(!empty($user))
+        {
+            return redirect()->back()->withErrors('Alreadey added')->withInput();
+        }
 
         //student
         $user_student = User::create([

@@ -7,6 +7,18 @@ use App\ClassSubjectList;
 
 class SubjectListController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if($request->user()->type == 'superadmin'||$request->user()->type == 'admin') {
+                return $next($request);
+            } else {
+                return redirect('/');
+            }
+        });
+    }
+    
     public function add_subject_list_form()
     {
         return view('class.add_subject_list');

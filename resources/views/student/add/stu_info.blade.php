@@ -15,7 +15,7 @@
     <div class="col-lg-4">
       <div class="form-group">
         <label class="form-control-label" for="input-email">Date Of Birth</label>
-        <input type="date"  class="form-control form-control-alternative" name="date_of_birth" value="{{ old('date_of_birth') }}" placeholder="">
+        <input type="date"  class="form-control form-control-alternative datepicker" name="date_of_birth" value="{{ old('date_of_birth') }}" placeholder="">
       </div>
     </div>
   </div>

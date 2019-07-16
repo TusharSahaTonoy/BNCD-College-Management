@@ -8,6 +8,18 @@ use App\ClassSectionList;
 
 class SectionListController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if($request->user()->type == 'superadmin'||$request->user()->type == 'admin') {
+                return $next($request);
+            } else {
+                return redirect('/');
+            }
+        });
+    }
+    
     public function add_section_list_form()
     {
         return view('class.add_section_list');
