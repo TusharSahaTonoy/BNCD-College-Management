@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\ClassSectionList;
+
+class SectionListController extends Controller
+{
+    public function add_section_list_form()
+    {
+        return view('class.add_section_list');
+    }
+    public function add_section_list(Request $request)
+    {
+        //check class group already added or not
+        //8 class no group
+
+        for ($i=1; $i <= $request->sec_list; $i++) { 
+            ClassSectionList::create([
+                'class' => $request->sub_class,
+                'group' => $request->sub_group,
+                'section' => chr(64+$i),
+            ]);
+        }
+
+        return redirect('/');
+        
+    }
+}
