@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title','All Teacher Info')
+@section('title','View Teacher Info')
 
 @section('content')
 	<!-- Header -->
@@ -48,7 +48,10 @@
                       <td>{{$teacher->teacher_id}}</td>
                       <td>{{$teacher->teacher_name}}</td>
                       <td>{{$teacher->user->role}}</td>
-                      <td></td>
+                      <td>
+                        <a href=" {{route('teacher.view_teacher',$teacher->id)}} " class="btn btn-sm btn-default"><i class="far fa-eye"></i></a>
+                        <a href=" {{route('teacher.edit_teacher_form',$teacher->id)}} " class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                      </td>
                     </tr>
                   @endforeach
                 </thead>

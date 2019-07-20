@@ -14,7 +14,10 @@ class TeacherController extends Controller
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if($request->user()->type == 'superadmin'||$request->user()->type == 'admin') {
+            if($request->user()->type == 'superadmin'
+            ||$request->user()->type == 'admin'
+            ||$request->user()->type == 'teacher'
+            ||$request->user()->type == 'worker') {
                 return $next($request);
             } else {
                 return redirect('/');
@@ -24,17 +27,30 @@ class TeacherController extends Controller
 
     public function index()
     {
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
+        {
+            return redirect('/')->with('error','Invalid User');
+        }
         $teachers = Teacher::all();
         return view('teacher.all_teachers',compact('teachers'));
     }
 
     public function add_teacher_form()
     {
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
+        {
+            return redirect('/')->with('error','Invalid User');
+        }
         return view('teacher.add_teacher');
     }
 
     public function add_teacher(Request $request)
     {
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
+        {
+            return redirect('/')->with('error','Invalid User');
+        }
+
         $user = User::where('user_id','T-'. $request->teacher_id)->first();
         if(!empty($user))
         {
@@ -61,6 +77,40 @@ class TeacherController extends Controller
         ]);
 
         return redirect('/');
+    }
 
+    public function view_teacher($id)
+    {
+        $teacher = Teacher::find($id);
+        return view('teacher.view_teacher',compact('teacher'));
+    }
+
+    public function edit_teacher_form($id)
+    {
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
+        {
+            return redirect('/')->with('error','Invalid User');
+        }
+
+        $teacher = Teacher::find($id);
+        return view('teacher.edit_teacher',compact('teacher','id'));
+    }
+    public function edit_teacher(Request $request)
+    {
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
+        {
+            return redirect('/')->with('error','Invalid User');
+        }
+
+        $teacher = Teacher::find($request->id);
+        $teacher->teacher_name = $request->teacher_name;
+        $teacher->email =$request->email;
+        $teacher->phone =$request->phone;
+        $teacher->department =$request->department;
+        $teacher->join_year =$request->join_year;
+
+        $teacher->save();
+
+        return redirect('/teacher');
     }
 }

@@ -48,7 +48,9 @@
                       <td>{{$user->user_name}}</td>
                       <td>{{$user->type}}</td>
                       <td>{{$user->role}}</td>
-                      <td></td>
+                      <td>
+                        <a href=" {{route('user.edit_form',$user->id)}} " class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                      </td>
                     </tr>
                   @endforeach
                 </thead>

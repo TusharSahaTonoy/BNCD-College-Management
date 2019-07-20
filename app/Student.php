@@ -25,5 +25,10 @@ class Student extends Model
         return $this->hasOne(Student\StuOfficeInfo::class, 'student_id', 'student_id');
 
     }
+
+    public function school()
+    {
+        return $this->hasOne(Student\StuSchoolInfo::class, 'student_id', 'student_id');
+    }
     
 }

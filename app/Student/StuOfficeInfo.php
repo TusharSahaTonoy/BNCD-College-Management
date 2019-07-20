@@ -16,5 +16,7 @@ class StuOfficeInfo extends Model
     {
         return $this->belongsTo('App\Student', 'student_id','student_id');
     }
+
+    
     
 }

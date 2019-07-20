@@ -11,6 +11,15 @@
     
     <div class="main-content">
     
+      <div class="container-fluid">
+        <div class="header-body">
+            @if (count($errors)>0)
+            @foreach ($errors->all() as $error)
+              <div class="alert alert-danger">{{ $error }}</div>
+            @endforeach
+          @endif
+        </div>
+      </div>
       <!-- Top navbar -->
       @include('layouts.topnav')
 

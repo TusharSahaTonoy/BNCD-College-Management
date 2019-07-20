@@ -40,4 +40,13 @@ class UserController extends Controller
 
         return view('user.login');
     }
+
+    public function edit_form($id)
+    {
+
+    }
+    public function edit(Request $r)
+    {
+        return $r;
+    }
 }

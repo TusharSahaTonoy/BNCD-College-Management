@@ -17,7 +17,7 @@
   </a>
   <div class="collapse" id="attendance-forms">
     <ul class="nav nav-sm flex-column">
-      <li class="nav-item"><a href="  " class="nav-link">Take Attendance</a></li>
+      <li class="nav-item"><a href=" {{ route('attendance.take_attendance') }} " class="nav-link">Take Attendance</a></li>
       <li class="nav-item"><a href="  " class="nav-link">All Attendance</a></li>
       <li class="nav-item"><a href="  " class="nav-link">Student Attendance list</a></li>
     </ul>

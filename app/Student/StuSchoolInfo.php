@@ -11,4 +11,10 @@ class StuSchoolInfo extends Model
     protected $fillable = [
         'class','group','section','guide_teacher','student_id',
     ];
+
+    public function student()
+    {
+        return $this->belongsTo('App\Student', 'student_id','student_id');
+    }
+
 }

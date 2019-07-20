@@ -40,7 +40,7 @@
     <div class="col-lg-5">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Mobile No.</label>
-        <input type="number" class="form-control form-control-alternative" name="father_mobile" value="{{ old('father_mobile') }}" placeholder="" required>
+        <input type="number" class="form-control form-control-alternative" name="father_mobile" value="{{ old('father_mobile') }}" placeholder="">
       </div>
     </div>
     <div class="col-lg-7">
@@ -93,7 +93,7 @@
     <div class="col-lg-5">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Mobile No.</label>
-        <input type="number" class="form-control form-control-alternative" name="mother_mobile" value="{{ old('mother_mobile') }}" placeholder="" required>
+        <input type="number" class="form-control form-control-alternative" name="mother_mobile" value="{{ old('mother_mobile') }}" placeholder="">
       </div>
     </div>
     <div class="col-lg-7">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ClassSubjectList;
 
+use Illuminate\Support\Facades\DB;
+
 class SubjectListController extends Controller
 {
     public function __construct()
@@ -39,5 +41,12 @@ class SubjectListController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function view_subject_list()
+    {
+        $subject_list = ClassSubjectList::groupBy('class','group')->get();
+
+        return view('class.view_subject_list', compact('subject_list'));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,18 +12,20 @@ use App\Student\StuParents;
 use App\Student\StuOfficeInfo;
 use App\Student\StuSchoolInfo;
 
+use App\Teacher;
+
 class StudentController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if($request->user()->type == 'superadmin'||$request->user()->type == 'admin') {
-                return $next($request);
-            } else {
-                return redirect('/');
-            }
-        });
+        // $this->middleware(function ($request, $next) {
+        //     if($request->user()->type == 'superadmin'||$request->user()->type == 'admin') {
+        //         return $next($request);
+        //     } else {
+        //         return redirect('/');
+        //     }
+        // });
     }
 
     public function index()
@@ -82,7 +84,9 @@ class StudentController extends Controller
             'local_image'=>'',
 
         ];
-        return view('student.add.add_student', compact('data'));
+
+        $teachers = Teacher::all();
+        return view('student.add.add_student', compact('teachers'));
     }
 
     public function add_student(Request $request)
@@ -171,6 +175,27 @@ class StudentController extends Controller
         ]);
 
         return redirect('/');
+    }
 
+    public function view_student($id)
+    {
+        $student = Student::find($id);
+        return view('student.view.view_student',compact('student'));
+    }
+    public function edit_student_form($id)
+    {
+        $student = Student::find($id);
+
+        return view('student.edit.edit_student',compact('student'));
+    }
+
+    public function edit_student(Request $request)
+    {
+
+    }
+
+    public function delete_student($id)
+    {
+        
     }
 }

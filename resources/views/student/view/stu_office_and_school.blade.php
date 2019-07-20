@@ -48,12 +48,7 @@
       <div class="col-lg-4">
         <div class="form-group focused">
           <label class="form-control-label" for="input-first-name">Guide Teacher ID</label>
-          <select class="form-control form-control-alternative" name="guide_teacher" required>
-            <Option value="{{old('guide_teacher')}}" ></Option>
-            @foreach ($teachers as $teacher)
-              <Option value=" {{$teacher->teacher_id}} "> {{$teacher->teacher_name}} </Option>
-            @endforeach
-          </select>
+          <input type="text" class="form-control form-control-alternative" name="guide_teacher" value="{{old('guide_teacher')}}" placeholder="" >
         </div>
       </div>
       <div class="col-lg-4">
