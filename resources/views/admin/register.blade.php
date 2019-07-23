@@ -6,17 +6,21 @@
 
 @section('content')
   <!-- Header -->
-  <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+  {{-- <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
       <div class="header-body">
-          @if (count($errors)>0)
+        @if (count($errors)>0)
           @foreach ($errors->all() as $error)
             <div class="alert alert-danger">{{ $error }}</div>
           @endforeach
         @endif
+
+        @if(Session::has('success'))
+          
+        @endif
       </div>
     </div>
-  </div>
+  </div> --}}
   <div class="container-fluid mt--7">
     <div class="row justify-content-center">
       <div class="col-xl-8 mb-5 mb-xl-0">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\ClassSubjectList;
 use App\ClassSectionList;
 
 class SectionListController extends Controller
@@ -22,7 +23,8 @@ class SectionListController extends Controller
     
     public function add_section_list_form()
     {
-        return view('class.add_section_list');
+        $class_list = ClassSubjectList::select('class')->groupBy('class')->get();
+        return view('class.add_section_list',compact('class_list'));
     }
     public function add_section_list(Request $request)
     {

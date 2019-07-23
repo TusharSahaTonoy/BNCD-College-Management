@@ -63,12 +63,17 @@ Route::post('subject-teacher/add', 'SubjectTeacherController@add_subject_teacher
 
 
 //----------------------- Attendance ----------------------------
+Route::get('attendance', 'AttendanceController@index')->name('attendance');
+
 Route::get('attendance/take-attendance', 'AttendanceController@attendance_subject_list')->name('attendance.take_attendance');
 
-Route::get('attendance/take-attendance/{section}', 'AttendanceController@attendence_form')->name('attendance.attendace_form');
-Route::post('attendance/take-attendance/store', 'AttendanceController@attendence_store')->name('attendance.attendace_store');
+Route::get('attendance/take-attendance/{section}', 'AttendanceController@attendence_form')->name('attendance.attendance_form');
+Route::post('attendance/take-attendance/store', 'AttendanceController@attendence_store')->name('attendance.attendance_store');
 
+Route::get('attendance/view/{attendance}', 'AttendanceController@view_attendance')->name('attendance.view');
 
+Route::get('attendance/view-all/principal','AttendanceController@view_attendance_principal_form')->name('attendance.all.principal.form');
+Route::get('attendance/view-all/principal/{class}','AttendanceController@view_attendance_principal')->name('attendance.all.principal');
 
 //------------------------- student ---------------------------
 
@@ -78,6 +83,13 @@ Route::get('student/add', 'StudentController@add_student_form')->name('student.a
 Route::post('student/add', 'StudentController@add_student')->name('student.add_student');
 
 Route::get('student/view/{id}', 'StudentController@view_student')->name('student.view_student');
+Route::get('student/edit/', 'StudentController@view_student')->name('student.edit_student');
+
+Route::get('student/attendence/all', 'StudentController@view_all_attendance')->name('student.view_all_attendance');
+
+//--------------------------- parents ----------------------------------
+Route::get('parents/student-attendance','ParentsController@stu_att_summary')->name('parents.student_attendance');
+
 
 
 //------------------------- section list ---------------------------------

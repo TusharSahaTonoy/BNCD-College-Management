@@ -13,16 +13,16 @@ class TeacherController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if($request->user()->type == 'superadmin'
-            ||$request->user()->type == 'admin'
-            ||$request->user()->type == 'teacher'
-            ||$request->user()->type == 'worker') {
-                return $next($request);
-            } else {
-                return redirect('/');
-            }
-        });
+        // $this->middleware(function ($request, $next) {
+        //     if($request->user()->type == 'superadmin'
+        //     ||$request->user()->type == 'admin'
+        //     ||$request->user()->type == 'teacher'
+        //     ||$request->user()->type == 'worker') {
+        //         return $next($request);
+        //     } else {
+        //         return redirect('/');
+        //     }
+        // });
     }
 
     public function index()
@@ -31,6 +31,7 @@ class TeacherController extends Controller
         {
             return redirect('/')->with('error','Invalid User');
         }
+        
         $teachers = Teacher::all();
         return view('teacher.all_teachers',compact('teachers'));
     }
@@ -39,8 +40,9 @@ class TeacherController extends Controller
     {
         if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
         {
-            return redirect('/')->with('error','Invalid User');
+            return redirect('/')->with('error','User Not Valid');
         }
+
         return view('teacher.add_teacher');
     }
 
@@ -54,7 +56,7 @@ class TeacherController extends Controller
         $user = User::where('user_id','T-'. $request->teacher_id)->first();
         if(!empty($user))
         {
-            return redirect()->back()->withErrors('Teacher Alreadey added')->withInput();
+            return redirect()->back()->with('error','Teacher Alreadey added')->withInput();
         }
 
         // return $request;
@@ -76,7 +78,7 @@ class TeacherController extends Controller
             'user_id'=>$user->user_id
         ]);
 
-        return redirect('/');
+        return redirect('/')->with('success','Teacher Added Successfully');
     }
 
     public function view_teacher($id)

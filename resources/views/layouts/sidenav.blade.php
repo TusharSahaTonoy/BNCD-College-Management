@@ -99,14 +99,29 @@
           @endif
 
           @if (Auth::user()->type == 'teacher')
-            @include('teacher.sidebar_teacher')
+
+            @switch(Auth::user()->role)
+                @case('principal')
+                  @include('teacher.principal.sidebar_principal')      
+                  @break
+
+                @case('vice_principal')
+                  @include('teacher.vice_principal.sidebar_vice_principal')
+                  @break
+
+                @case('co_odinator')
+                  @include('teacher.co_odinator.sidebar_co_odinator')
+                  @break
+                @default
+                  @include('teacher.sidebar_teacher')
+            @endswitch
           @endif
 
           @if (Auth::user()->type == 'student')
             @include('student.sidebar_student')
           @endif
           @if (Auth::user()->type == 'parents')
-            @include('student.sidebar_student')
+            @include('parents.sidebar_parents')
           @endif
         @endauth
         

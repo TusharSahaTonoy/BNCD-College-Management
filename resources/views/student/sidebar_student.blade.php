@@ -18,7 +18,7 @@
   <div class="collapse" id="attendance-forms">
     <ul class="nav nav-sm flex-column">
       <li class="nav-item"><a href="  " class="nav-link">Marks</a></li>
-      <li class="nav-item"><a href="  " class="nav-link">Attendance</a></li>
+      <li class="nav-item"><a href=" {{route('student.view_all_attendance')}} " class="nav-link">Attendance</a></li>
     </ul>
   </div>
 </li>

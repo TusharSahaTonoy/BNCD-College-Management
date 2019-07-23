@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title','Select Section')
+@section('title','All Attendence')
 
 @section('content')
 
@@ -18,15 +18,17 @@
                   <th scope="col">Group</th>
                   <th scope="col">Subject</th>
                   <th scope="col">Section</th>
+                  <th scope="col">Date</th>
                   <th scope="col">Action</th>
                 </tr>
-                @foreach ($subjects as $subject)
+                @foreach ($all_att as $att)
                   <tr>
-                    <td>{{$subject->class}}</td>
-                    <td>{{$subject->group}}</td>
-                    <td>{{$subject->subject}}</td>
-                    <td>{{$subject->section}}</td>
-                    <td><a href=" {{route('attendance.attendance_form',$subject->class.','.$subject->group.','.$subject->subject.','.$subject->section)}} ">Take Attendence</a></td>
+                    <td>{{$att->class}}</td>
+                    <td>{{$att->group}}</td>
+                    <td>{{$att->subject}}</td>
+                    <td>{{$att->section}}</td>
+                    <td>{{$att->att_date}}</td>
+                    <td><a href=" {{route('attendance.view',$att->class.','.$att->group.','.$att->subject.','.$att->section.','.$att->att_date)}} ">View</a></td>
                   </tr>
                 @endforeach
               </thead>

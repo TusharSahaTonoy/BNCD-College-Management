@@ -36,7 +36,7 @@ class UserController extends Controller
     public function login_form()
     {
         if(Auth::check())
-            return redirect('/')->with('errors','You are already logged in');
+            return redirect('/')->with('error','You are already logged in');
 
         return view('user.login');
     }

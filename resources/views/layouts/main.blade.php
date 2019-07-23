@@ -11,21 +11,22 @@
     
     <div class="main-content">
     
-      <div class="container-fluid">
-        <div class="header-body">
-            @if (count($errors)>0)
-            @foreach ($errors->all() as $error)
-              <div class="alert alert-danger">{{ $error }}</div>
-            @endforeach
-          @endif
-        </div>
-      </div>
       <!-- Top navbar -->
       @include('layouts.topnav')
+
+      <!-- Header -->
+      @include('layouts.message_header')
 
       <!-- main content -->
       @yield('content')
     
+      <!-- footer -->
+      <br>
+      <div class="container-fluid">
+        <div class="row">
+          <h4></h4>
+        </div>
+      </div>
     </div>
     
     <!-- Argon Scripts -->

@@ -25,7 +25,12 @@
             
             <div class="media-body ml-2 d-none d-lg-block">
               <span class="mb-0 text-sm text-uppercase font-weight-bold"> 
-                  Hello, {{Auth::user()->type}}
+                  Hello,
+                  @if(auth()->user()->type=='teacher') 
+                    {{auth()->user()->role}}
+                  @else
+                    {{auth()->user()->type}}
+                  @endif
               </span>
             </div>
             

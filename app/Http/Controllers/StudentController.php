@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 use App\User;
 use App\Student;
 use App\Student\StuParents;
 use App\Student\StuOfficeInfo;
 use App\Student\StuSchoolInfo;
+use App\Student\StuAttendance;
+
 
 use App\Teacher;
 
@@ -19,17 +22,20 @@ class StudentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        // $this->middleware(function ($request, $next) {
-        //     if($request->user()->type == 'superadmin'||$request->user()->type == 'admin') {
-        //         return $next($request);
-        //     } else {
-        //         return redirect('/');
-        //     }
-        // });
+        $this->middleware(function ($request, $next) {
+            if((in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker","student")))) {
+                return $next($request);
+            } else {
+                return redirect('/')->with('error','You are not valid user');
+            }
+        });
     }
 
     public function index()
     {
+        if(!(in_array(auth()->user()->type ,['superadmin','admin','principal','vice_principal','co_odinator']))) {
+            return redirect('/')->with('error','Sorry,You are not valid user');
+        }
         $students = Student::all();
         return view('student.all_students',compact('students'));
     }
@@ -37,53 +43,53 @@ class StudentController extends Controller
     public function add_student_form()
     {
 
-        $data = (object)[
-            'stu_name'=> chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
-            'stu_class' => '',
-            'stu_group'=> '',
-            'stu_section'=>'',
-            'stu_roll' => rand(10000,70000),
-            'guide_teacher' =>'',
-            'admition_date' => '',
-            'nomination_no' =>'',
-            'seccurity_code' =>rand(10000,70000),
-            'nationality' => 'Bangladeshi',
-            'religion' =>'Islam',
-            'date_of_birth'=>'',
-            'emargency1'=>'01234567890',
-            'emargency2'=>'01234567890',
-            'father_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
-            'father_occ'=>'',
-            'father_pos'=>'',
-            'father_ins'=>'',
-            'father_income'=>'',
-            'father_mobile'=>'01234567890',
-            'father_image'=>'',
-            'mother_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
-            'mother_occ'=>'',
-            'mother_pos'=>'',
-            'mother_ins'=>'',
-            'mother_income'=>'',
-            'mother_mobile'=>'01234567890',
-            'mother_image'=>'',
-            'guardian_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
-            'guardian_relation'=>'son',
-            'guardian_occu'=>'',
-            'guardian_ins'=>'',
-            'guardian_pos'=>'',
-            'guardian_income'=>'',
-            'guardian_mobile'=>'01234567890',
-            'guardian_image'=>'',
-            'local_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
-            'local_relation'=>'father',
-            'local_occu'=>'',
-            'local_ins'=>'',
-            'local_pos'=>'',
-            'local_income'=>'',
-            'local_mobile'=>'01234567890',
-            'local_image'=>'',
+        // $data = (object)[
+        //     'stu_name'=> chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
+        //     'stu_class' => '',
+        //     'stu_group'=> '',
+        //     'stu_section'=>'',
+        //     'stu_roll' => rand(10000,70000),
+        //     'guide_teacher' =>'',
+        //     'admition_date' => '',
+        //     'nomination_no' =>'',
+        //     'seccurity_code' =>rand(10000,70000),
+        //     'nationality' => 'Bangladeshi',
+        //     'religion' =>'Islam',
+        //     'date_of_birth'=>'',
+        //     'emargency1'=>'01234567890',
+        //     'emargency2'=>'01234567890',
+        //     'father_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
+        //     'father_occ'=>'',
+        //     'father_pos'=>'',
+        //     'father_ins'=>'',
+        //     'father_income'=>'',
+        //     'father_mobile'=>'01234567890',
+        //     'father_image'=>'',
+        //     'mother_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
+        //     'mother_occ'=>'',
+        //     'mother_pos'=>'',
+        //     'mother_ins'=>'',
+        //     'mother_income'=>'',
+        //     'mother_mobile'=>'01234567890',
+        //     'mother_image'=>'',
+        //     'guardian_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
+        //     'guardian_relation'=>'son',
+        //     'guardian_occu'=>'',
+        //     'guardian_ins'=>'',
+        //     'guardian_pos'=>'',
+        //     'guardian_income'=>'',
+        //     'guardian_mobile'=>'01234567890',
+        //     'guardian_image'=>'',
+        //     'local_name'=>chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)). ' ' .chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)).chr(rand(65,122)),
+        //     'local_relation'=>'father',
+        //     'local_occu'=>'',
+        //     'local_ins'=>'',
+        //     'local_pos'=>'',
+        //     'local_income'=>'',
+        //     'local_mobile'=>'01234567890',
+        //     'local_image'=>'',
 
-        ];
+        // ];
 
         $teachers = Teacher::all();
         return view('student.add.add_student', compact('teachers'));
@@ -197,5 +203,33 @@ class StudentController extends Controller
     public function delete_student($id)
     {
         
+    }
+
+    public function view_all_attendance()
+    {
+        if(!(in_array(auth()->user()->type ,array("student")))) {
+            return redirect('/')->with('error','You have to be a student');
+        }
+
+        $student_id = auth()->user()->student->student_id;
+
+        $all_attendance = StuAttendance::where('student_id',$student_id)->get();
+
+
+
+        
+        $persent_counts = DB::table('stu_attendances')->selectRaw('subject,count(attendance) as present, teacher_id')->where([
+            'student_id' => $student_id, 
+            'attendance'=>1
+            ])->groupBy('subject')->get();
+
+        $absent_counts = DB::table('stu_attendances')->selectRaw('subject,count(attendance) as absent, teacher_id')->where([
+            'student_id' => $student_id, 
+            'attendance'=>0
+            ])->groupBy('subject')->get();
+
+        // $persent_counts
+        // return $all_attendance;
+        return view('student.summary_att_student',compact('all_attendance'));
     }
 }

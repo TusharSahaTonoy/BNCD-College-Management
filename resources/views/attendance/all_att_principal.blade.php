@@ -18,15 +18,17 @@
                   <th scope="col">Group</th>
                   <th scope="col">Subject</th>
                   <th scope="col">Section</th>
+                  <th scope="col">Teacher</th>
                   <th scope="col">Action</th>
                 </tr>
-                @foreach ($subjects as $subject)
+                @foreach ($all_att as $att)
                   <tr>
-                    <td>{{$subject->class}}</td>
-                    <td>{{$subject->group}}</td>
-                    <td>{{$subject->subject}}</td>
-                    <td>{{$subject->section}}</td>
-                    <td><a href=" {{route('attendance.attendance_form',$subject->class.','.$subject->group.','.$subject->subject.','.$subject->section)}} ">Take Attendence</a></td>
+                    <td>{{$att->class}}</td>
+                    <td>{{$att->group}}</td>
+                    <td>{{$att->subject}}</td>
+                    <td>{{$att->section}}</td>
+                    <td>{{$att->teacher->teacher_name}}</td>
+                    <td><a href=" {{route('attendance.all.principal',$att->class.','.$att->group.','.$att->subject.','.$att->section.','.$att->teacher->teacher_name )}} ">View Attendence</a></td>
                   </tr>
                 @endforeach
               </thead>

@@ -47,10 +47,10 @@ class SubjectTeacherController extends Controller
         $class = $assign[0];
         $group = $assign[1];
         $section = $assign[2];
-        $subjects = ClassSubjectList::select('subject')->where('class',$class)
-                                                        ->orWhere('group',$group)->get();
-
-        // return $subjects;
+        $subjects = ClassSubjectList::select('subject')->where([
+            'class'=>$class,
+            'group'=> ($group==null)? null : $group
+            ])->get();
 
         return view('teacher.assign_subject_teacher',compact('class','group','section','subjects'));
 
@@ -59,6 +59,8 @@ class SubjectTeacherController extends Controller
     public function add_subject_teacher(Request $request)
     {
         // return $request;
+
+        //error check if already added
         for($i = 0; $i<sizeof($request->sub_list); $i++ )
         {
             if($request->teacher_list[$i] ==null)

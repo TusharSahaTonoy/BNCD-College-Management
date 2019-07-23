@@ -4,23 +4,6 @@
 
 @section('content')
 
-	<!-- Header -->
-	<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" {{-- style="min-height: 600px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;" --}}>
-    <!-- Mask -->
-    <span class="mask bg-gradient-default opacity-8"></span>
-    <!-- Header container -->
-    <div class="container-fluid d-flex align-items-center">
-      <div class="row">
-        <div class="col-lg-7 col-md-10">
-          @if (count($errors)>0)
-            @foreach ($errors->all() as $error)
-              <div class="alert alert-danger">{{ $error }}</div>
-            @endforeach
-          @endif
-        </div>
-      </div>
-    </div>
-  </div>
 	<!-- Page content -->
 	<div class="container-fluid mt--7">
     <form action="{{ route('section.add_section_list') }}" method="post">
@@ -33,13 +16,23 @@
               <div class="col-lg-4">
                 <div class="form-group focused">
                   <label class="form-control-label" for="input-username">Class</label>
-                  <input type="text"  class="form-control form-control-alternative" name="sub_class" placeholder="">
+                  <select name="sub_class" class="form-control form-control-alternative" required>
+                    <option value="" >Select Class</option>
+                    @foreach ($class_list as $class)
+                      <option value=" {{$class->class}} "> {{$class->class}} </option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label class="form-control-label" for="input-email">Group</label>
-                  <input type="text"  class="form-control form-control-alternative" name="sub_group" placeholder="">
+                  <select name="sub_class" class="form-control form-control-alternative" required>
+                      <option value="" >Select Group</option>
+                      <option value="Science" >Science</option>
+                      <option value="Commerce" >Commerce</option>
+                      <option value="Arts" >Arts</option>
+                    </select>
                 </div>
               </div>
             </div>
