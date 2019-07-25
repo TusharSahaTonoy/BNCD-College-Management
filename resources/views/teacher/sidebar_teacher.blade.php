@@ -31,9 +31,9 @@
   </a>
   <div class="collapse" id="marks-forms">
     <ul class="nav nav-sm flex-column">
-      <li class="nav-item"><a href=" {{ route('attendance.take_attendance') }} " class="nav-link">Quiz</a></li>
-      <li class="nav-item"><a href=" {{ route('attendance') }} " class="nav-link">Mid</a></li>
-      <li class="nav-item"><a href="  " class="nav-link">Final</a></li>
+      <li class="nav-item"><a href=" {{ route('marks.subject_list') }} " class="nav-link">Give Marks</a></li>
+      <li class="nav-item"><a href=" {{ route('attendance') }} " class="nav-link">Mid Marks</a></li>
+      <li class="nav-item"><a href="  " class="nav-link">Final Marks</a></li>
     </ul>
   </div>
 </li>

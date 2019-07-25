@@ -20,3 +20,20 @@
   <link type="text/css" href="{{asset('assets/css/argon.css?v=1.0.0')}}" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+
+  {{-- swiper --}}
+  <link type="text/css" href="{{asset('assets/css/swiper.min.css')}}" rel="stylesheet">
+  
+  {{-- making number box without buttons --}}
+  <style>
+    input[type=number] { 
+      -moz-appearance: textfield;
+      appearance: textfield;
+      margin: 0; 
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+    }
+  </style>

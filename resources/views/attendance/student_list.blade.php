@@ -20,33 +20,44 @@
         </div>
         <hr>
         <br>
-        @foreach ($student_list as $student)
-          <div class="card card-profile shadow">
-            <div class="row justify-content-center">
-              {{-- <div class="pt-md-4">
-                <img src="{{ Storage::url($info->studentinfo->StudentImage) }}" class="Avatar">
-              </div> --}}
-            </div>
-            <div class="card-body pt-0 pt-md-4">
-              <div class="text-center">
-                <h3>
-                  <strong>Name: </strong>{{ $student->student->student_name }}<br>
-                  <strong>Roll: </strong>{{ $student->student->office->roll }}
-                  <span class="font-weight-light"></span>
-                </h3>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="1" id="{{ $student->student_id }}" ><label class="form-check-label">Present</label> &nbsp
-                  <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="0" checked id="{{ $student->student_id }}"><label class="form-check-label">Absent</label> &nbsp
-                  <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="2" id="{{ $student->student_id }}"><label class="form-check-label">Leave</label> &nbsp
+        {{-- swipe container --}}
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            @foreach ($student_list as $student)
+              <div class="swiper-slide">
+                <div class="card card-profile shadow" >
+                  <div class="row justify-content-center">
+                    <div class="pt-md-4">
+                      <img src="{{ asset('/storage/students/student/'.$student->student->image) }}" class="Avatar">
+                    </div>
+                  </div>
+                  <div class="card-body pt-0 pt-md-4">
+                    <div class="text-center">
+                      <h3>
+                        <strong>Name: </strong>{{ $student->student->student_name }}<br>
+                        <strong>Roll: </strong>{{ $student->student->office->roll }}
+                        <span class="font-weight-light"></span>
+                      </h3>
+                      <div class="form-check form-check-inline att-slide">
+                        <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="1" id="{{ $student->student_id }}" ><label class="form-check-label">Present</label> &nbsp
+                        <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="0" checked id="{{ $student->student_id }}"><label class="form-check-label">Absent</label> &nbsp
+                        <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="2" id="{{ $student->student_id }}"><label class="form-check-label">Leave</label> &nbsp
+                      </div>
+
+                      {{-- <input type="hidden" name="student_list[]" value="{{ $info->student_id }}"> --}}
+
+                    </div>
+                  </div>
                 </div>
-
-                {{-- <input type="hidden" name="student_list[]" value="{{ $info->student_id }}"> --}}
-
               </div>
-            </div>
+            @endforeach
           </div>
-        @endforeach
+          <div class="swiper-pagination"></div>
 
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+        {{-- swipe container --}}
         <input type="hidden" name="teacher_id" value="{{ auth()->user()->teacher->teacher_id }}">
         <input type="hidden" name="class" value="{{ $att->class }}">
         <input type="hidden" name="group" value="{{ $att->group }}">
@@ -69,6 +80,20 @@
     height:90px;
     margin-top: 5px;
   }
+  .swiper-container {
+    width: 400px;
+    height: 300px;
+    padding: 50px;
+  }
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 400px;
+    height: 300px;
+  }
   </style>
 
+
+
 @endsection
+

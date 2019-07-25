@@ -54,12 +54,12 @@ class AttendanceController extends Controller
 
         $student_list = StuSchoolInfo::where([
             'class' => $data[0],
-            'group' => ($data[1] != ''?:null ),
+            'group' => ($data[1] == ''?null:$data[1] ),
             'section' => $data[3],
         ])->get();
 
 
-        // return $student_list;
+        //  return $student_list;
         
         return view('attendance.student_list',compact('att','student_list'));
     }

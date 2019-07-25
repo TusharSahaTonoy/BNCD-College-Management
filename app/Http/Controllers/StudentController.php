@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use File;
+
+// use App\Http\Requests\StudentInfoRequest;
 
 use App\User;
 use App\Student;
@@ -97,11 +100,30 @@ class StudentController extends Controller
 
     public function add_student(Request $request)
     {
+        // return $request;
+
+        $this->validate($request,[
+            'emergency1'       => 'required|max:14|min:11|max:14',
+            'emergency2'      => 'required|max:14|min:11|max:14',
+            'father_mobile'   => 'required|max:14|min:11|max:14',
+            'mother_mobile'   => 'required|max:14|min:11|max:14',
+            'stu_image'         => 'required|image|max:5000',
+            // 'father_image'         => 'required|image|max:5000',
+            // 'mother_image'         => 'required|image|max:5000'
+        ]
+        // [
+        //     'page1.required' => 'Question Page1 is required'
+        // ]
+        );
+
         $user = User::where('user_id','S-'. $request->stu_roll)->first();
         if(!empty($user))
         {
             return redirect()->back()->withErrors('Alreadey added')->withInput();
         }
+
+        $ext = $request->file('stu_image')->getClientOriginalExtension();
+        $stu_img = 's'.time().'.'.$ext;
 
         //student
         $user_student = User::create([
@@ -118,18 +140,13 @@ class StudentController extends Controller
             'nationality'=>$request->nationality,
             'religion'=>$request->religion,
             'date_of_birth'=>$request->date_of_birth,
-            'image'=>'',
+            'image'=>$stu_img,
             'emergency1'=>$request->emargency1,
             'emergency2'=>$request->emargency2,
             'user_id'=>$user_student->user_id
         ]);
+        $request->file('stu_image')->storeAs('public/students/student',$stu_img);
         
-        // $student = new Student(); 
-        // $student->student_id = $request->stu_roll;
-        // $student->student_name =  $request->stu_name;
-
-        // $student->user_id = $user_student->user_id;
-        // $student->save();
 
         StuOfficeInfo::create([
             'class'=> $request->stu_class,
@@ -180,7 +197,7 @@ class StudentController extends Controller
             'user_id'=> $parents->user_id
         ]);
 
-        return redirect('/');
+        return redirect('/student')->with('success','Student Added Successfully');
     }
 
     public function view_student($id)

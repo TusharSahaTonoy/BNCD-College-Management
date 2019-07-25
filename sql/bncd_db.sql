@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2019 at 09:02 AM
+-- Generation Time: Jul 24, 2019 at 07:26 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -71,7 +71,10 @@ INSERT INTO `class_section_lists` (`id`, `class`, `group`, `section`, `created_a
 (9, '7', NULL, 'A', '2019-07-17 04:50:47', '2019-07-17 04:50:47'),
 (10, '7', NULL, 'B', '2019-07-17 04:50:47', '2019-07-17 04:50:47'),
 (11, '7', NULL, 'C', '2019-07-17 04:50:47', '2019-07-17 04:50:47'),
-(12, '7', NULL, 'D', '2019-07-17 04:50:47', '2019-07-17 04:50:47');
+(12, '7', NULL, 'D', '2019-07-17 04:50:47', '2019-07-17 04:50:47'),
+(13, '11', 'Science', 'A', '2019-07-20 07:11:58', '2019-07-20 07:11:58'),
+(14, '11', 'Science', 'B', '2019-07-20 07:11:58', '2019-07-20 07:11:58'),
+(15, '11', 'Science', 'C', '2019-07-20 07:11:58', '2019-07-20 07:11:58');
 
 -- --------------------------------------------------------
 
@@ -103,7 +106,26 @@ INSERT INTO `class_subject_lists` (`id`, `class`, `group`, `subject`, `created_a
 (8, '7', NULL, 'aaa', '2019-07-17 04:53:12', '2019-07-17 04:53:12'),
 (9, '7', NULL, 'bbb', '2019-07-17 04:53:13', '2019-07-17 04:53:13'),
 (10, '7', NULL, 'cccc', '2019-07-17 04:53:13', '2019-07-17 04:53:13'),
-(11, '7', NULL, 'ddd', '2019-07-17 04:53:13', '2019-07-17 04:53:13');
+(11, '7', NULL, 'ddd', '2019-07-17 04:53:13', '2019-07-17 04:53:13'),
+(12, '11', 'Science', 'math', '2019-07-20 07:10:29', '2019-07-20 07:10:29'),
+(13, '11', 'Science', 'english', '2019-07-20 07:10:29', '2019-07-20 07:10:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mark_distributions`
+--
+
+CREATE TABLE `mark_distributions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `class` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quiz` int(11) NOT NULL,
+  `mid` int(11) NOT NULL,
+  `final` int(11) NOT NULL,
+  `attendance` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -136,7 +158,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2019_07_14_085904_create_class_subject_lists_table', 6),
 (19, '2019_07_14_142736_create_stu_office_infos_table', 7),
 (20, '2019_07_19_040045_create_workers_table', 8),
-(21, '2019_07_20_063957_create_stu_attendances_table', 8);
+(21, '2019_07_20_063957_create_stu_attendances_table', 8),
+(22, '2019_07_23_110012_create_subject_marks_table', 9),
+(23, '2019_07_23_113552_create_mark_distributions_table', 9);
 
 -- --------------------------------------------------------
 
@@ -176,10 +200,13 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `student_id`, `student_name`, `nationality`, `religion`, `date_of_birth`, `image`, `emergency1`, `emergency2`, `user_id`, `created_at`, `updated_at`) VALUES
-(9, '111', 'Coma', 'Bangladeshi', 'Islam', '2014-05-10', '', '0123456789', NULL, 'S-111', '2019-07-16 15:20:19', '2019-07-16 15:20:19'),
-(10, '222', 'Faruk khan', 'Bangladesh', 'Islam', '1998-06-14', '', '0123466799', NULL, 'S-222', '2019-07-19 06:14:16', '2019-07-19 06:14:16'),
-(11, '333', 'Lomon h', 'Bangladeshi', 'Hindu', '1990-02-06', '', '012345678900', NULL, 'S-333', '2019-07-19 06:17:55', '2019-07-19 06:17:55'),
-(12, '444', 'Dalim mia', 'Bangladeshi', 'Islam', '2000-12-05', '', '0123456789', NULL, 'S-444', '2019-07-19 07:05:53', '2019-07-19 07:05:53');
+(9, '111', 'Coma', 'Bangladeshi', 'Islam', '2014-05-10', 's123.jpg', '0123456789', NULL, 'S-111', '2019-07-16 15:20:19', '2019-07-16 15:20:19'),
+(10, '222', 'Faruk khan', 'Bangladesh', 'Islam', '1998-06-14', 's142.png', '0123466799', NULL, 'S-222', '2019-07-19 06:14:16', '2019-07-19 06:14:16'),
+(11, '333', 'Lomon h', 'Bangladeshi', 'Hindu', '1990-02-06', '1.jpg', '012345678900', NULL, 'S-333', '2019-07-19 06:17:55', '2019-07-19 06:17:55'),
+(12, '444', 'Dalim mia', 'Bangladeshi', 'Islam', '2000-12-05', 's452.jpg', '0123456789', NULL, 'S-444', '2019-07-19 07:05:53', '2019-07-19 07:05:53'),
+(13, '8111', 'Alom q', 'Bangladeshi', 'Islam', '2006-02-06', 's42.jpg', '01234567890', NULL, 'S-8111', '2019-07-20 04:42:10', '2019-07-20 04:42:10'),
+(14, '8112', 'Manik Sha', 'Bangladeshi', 'Islam', '2007-02-12', 's1234.jpg', '01234567890', NULL, 'S-8112', '2019-07-20 04:45:25', '2019-07-20 04:45:25'),
+(15, '9111', 'Aomc', 'Bangladeshi', 'Islam', '2019-07-15', 's1563981070.jpg', NULL, NULL, 'S-9111', '2019-07-24 09:11:11', '2019-07-24 09:11:11');
 
 -- --------------------------------------------------------
 
@@ -195,10 +222,37 @@ CREATE TABLE `stu_attendances` (
   `subject` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `section` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `teacher_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `attendence` tinyint(4) NOT NULL,
+  `attendance` tinyint(4) NOT NULL,
+  `att_date` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `stu_attendances`
+--
+
+INSERT INTO `stu_attendances` (`id`, `student_id`, `class`, `group`, `subject`, `section`, `teacher_id`, `attendance`, `att_date`, `created_at`, `updated_at`) VALUES
+(1, '222', '9', 'Science', 'aaa', 'A', '1231', 1, '2019-07-20', '2019-07-20 02:04:28', '2019-07-20 02:04:28'),
+(2, '333', '9', 'Science', 'aaa', 'A', '1231', 0, '2019-07-20', '2019-07-20 02:04:28', '2019-07-20 02:04:28'),
+(3, '444', '9', 'Science', 'aaa', 'A', '1231', 2, '2019-07-20', '2019-07-20 02:04:28', '2019-07-20 02:04:28'),
+(4, '222', '9', 'Science', 'ccc', 'A', '1231', 1, '2019-07-21', '2019-07-20 02:07:17', '2019-07-20 02:07:17'),
+(5, '333', '9', 'Science', 'ccc', 'A', '1231', 0, '2019-07-21', '2019-07-20 02:07:17', '2019-07-20 02:07:17'),
+(6, '444', '9', 'Science', 'ccc', 'A', '1231', 1, '2019-07-21', '2019-07-20 02:07:17', '2019-07-20 02:07:17'),
+(7, '222', '9', 'Science', 'aaa', 'A', '1231', 1, '2019-07-22', '2019-07-20 03:21:20', '2019-07-20 03:21:20'),
+(8, '333', '9', 'Science', 'aaa', 'A', '1231', 0, '2019-07-22', '2019-07-20 03:21:20', '2019-07-20 03:21:20'),
+(9, '444', '9', 'Science', 'aaa', 'A', '1231', 1, '2019-07-22', '2019-07-20 03:21:20', '2019-07-20 03:21:20'),
+(10, '222', '9', 'Science', 'ccc', 'A', '1231', 0, '2019-07-20', '2019-07-20 03:23:41', '2019-07-20 03:23:41'),
+(11, '333', '9', 'Science', 'ccc', 'A', '1231', 1, '2019-07-20', '2019-07-20 03:23:41', '2019-07-20 03:23:41'),
+(12, '444', '9', 'Science', 'ccc', 'A', '1231', 1, '2019-07-20', '2019-07-20 03:23:41', '2019-07-20 03:23:41'),
+(13, '8111', '8', NULL, 'aaa', 'A', '1231', 0, '2019-07-21', '2019-07-20 05:55:08', '2019-07-20 05:55:08'),
+(14, '8112', '8', NULL, 'aaa', 'A', '1231', 1, '2019-07-21', '2019-07-20 05:55:08', '2019-07-20 05:55:08'),
+(15, '8111', '8', NULL, 'ccc', 'A', '1231', 1, '2019-07-20', '2019-07-20 05:55:28', '2019-07-20 05:55:28'),
+(16, '8112', '8', NULL, 'ccc', 'A', '1231', 1, '2019-07-20', '2019-07-20 05:55:28', '2019-07-20 05:55:28'),
+(17, '8111', '8', NULL, 'aaa', 'A', '1231', 2, '2019-07-23', '2019-07-21 14:54:51', '2019-07-21 14:54:51'),
+(18, '8112', '8', NULL, 'aaa', 'A', '1231', 2, '2019-07-23', '2019-07-21 14:54:51', '2019-07-21 14:54:51'),
+(19, '8111', '8', NULL, 'aaa', 'A', '1231', 1, '2019-07-15', '2019-07-24 05:35:28', '2019-07-24 05:35:28'),
+(20, '8112', '8', NULL, 'aaa', 'A', '1231', 2, '2019-07-15', '2019-07-24 05:35:28', '2019-07-24 05:35:28');
 
 -- --------------------------------------------------------
 
@@ -267,7 +321,10 @@ INSERT INTO `stu_office_infos` (`id`, `class`, `group`, `section`, `roll`, `nomi
 (6, '7', 'Science', 'A', '111', NULL, NULL, '111', '2019-07-16 15:20:19', '2019-07-16 15:20:19'),
 (7, '9', 'Science', 'A', '222', 'Tushar Saha', '12301', '222', '2019-07-19 06:14:16', '2019-07-19 06:14:16'),
 (8, '9', 'Science', 'A', '333', NULL, '12451', '333', '2019-07-19 06:17:55', '2019-07-19 06:17:55'),
-(9, '9', 'Science', 'A', '444', NULL, '6594', '444', '2019-07-19 07:05:53', '2019-07-19 07:05:53');
+(9, '9', 'Science', 'A', '444', NULL, '6594', '444', '2019-07-19 07:05:53', '2019-07-19 07:05:53'),
+(10, '8', NULL, 'A', '8111', NULL, '1230', '8111', '2019-07-20 04:42:10', '2019-07-20 04:42:10'),
+(11, '8', NULL, 'A', '8112', NULL, NULL, '8112', '2019-07-20 04:45:25', '2019-07-20 04:45:25'),
+(12, '9', 'Science', 'A', '9111', NULL, '1230', '9111', '2019-07-24 09:11:11', '2019-07-24 09:11:11');
 
 -- --------------------------------------------------------
 
@@ -305,7 +362,10 @@ INSERT INTO `stu_parents` (`id`, `father_name`, `father_occu`, `father_position`
 (3, 'asdf sefsd', 'Teacher', NULL, NULL, '12000', '0133456789', NULL, 'asefsesd', 'H. Wife', NULL, NULL, NULL, '0123456789', NULL, '111', 'P-111', '2019-07-16 15:20:20', '2019-07-16 15:20:20'),
 (4, 'Konal Khan', 'B man', NULL, 'Co. ltd', '30000', '01234566789', NULL, 'Flanm Khan', 'H wife', '12345678900', NULL, NULL, '012345678900', NULL, '222', 'P-222', '2019-07-19 06:14:16', '2019-07-19 06:14:16'),
 (5, 'Dolam h', 'B man', NULL, 'Ltd', '160000', '01234567890', NULL, 'Gomana H', NULL, NULL, NULL, NULL, '01234567890', NULL, '333', 'P-333', '2019-07-19 06:17:55', '2019-07-19 06:17:55'),
-(6, 'Solim Mia', 'Engineer', NULL, 'Tech ltd', '500000', '0123456789', NULL, 'Volamna Begom', NULL, NULL, NULL, NULL, '01234567990', NULL, '444', 'P-444', '2019-07-19 07:05:54', '2019-07-19 07:05:54');
+(6, 'Solim Mia', 'Engineer', NULL, 'Tech ltd', '500000', '0123456789', NULL, 'Volamna Begom', NULL, NULL, NULL, NULL, '01234567990', NULL, '444', 'P-444', '2019-07-19 07:05:54', '2019-07-19 07:05:54'),
+(7, 'Dalam Q', 'Employee', NULL, NULL, '30000', '01234567890', NULL, 'Ramola', 'H. Wife', NULL, NULL, NULL, '01234567890', NULL, '8111', 'P-8111', '2019-07-20 04:42:10', '2019-07-20 04:42:10'),
+(8, 'Samal Sha', 'B Man', NULL, NULL, '60000', '0123456789', NULL, 'Rafija', 'Teacher', NULL, NULL, '80000', '01234567980', NULL, '8112', 'P-8112', '2019-07-20 04:45:26', '2019-07-20 04:45:26'),
+(9, 'Qsmal', NULL, NULL, NULL, NULL, '01234567890', NULL, 'Awdas', NULL, NULL, NULL, NULL, '01234567890', NULL, '9111', 'P-9111', '2019-07-24 09:11:11', '2019-07-24 09:11:11');
 
 -- --------------------------------------------------------
 
@@ -332,7 +392,39 @@ INSERT INTO `stu_school_infos` (`id`, `class`, `group`, `section`, `guide_teache
 (4, '7', 'Science', 'A', '12234', '111', '2019-07-16 15:20:19', '2019-07-16 15:20:19'),
 (5, '9', 'Science', 'A', '1231', '222', '2019-07-19 06:14:16', '2019-07-19 06:14:16'),
 (6, '9', 'Science', 'A', '1231', '333', '2019-07-19 06:17:55', '2019-07-19 06:17:55'),
-(7, '9', 'Science', 'A', '1231', '444', '2019-07-19 07:05:53', '2019-07-19 07:05:53');
+(7, '9', 'Science', 'A', '1231', '444', '2019-07-19 07:05:53', '2019-07-19 07:05:53'),
+(8, '8', NULL, 'A', '1231', '8111', '2019-07-20 04:42:10', '2019-07-20 04:42:10'),
+(9, '8', NULL, 'A', '1231', '8112', '2019-07-20 04:45:26', '2019-07-20 04:45:26'),
+(10, '9', 'Science', 'A', '1231', '9111', '2019-07-24 09:11:11', '2019-07-24 09:11:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject_marks`
+--
+
+CREATE TABLE `subject_marks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `class` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quiz1_cq` decimal(8,2) NOT NULL,
+  `quiz1_mcq` decimal(8,2) NOT NULL,
+  `quiz2_cq` decimal(8,2) NOT NULL,
+  `quiz2_mcq` decimal(8,2) NOT NULL,
+  `mid_cq` decimal(8,2) NOT NULL,
+  `mid_mcq` decimal(8,2) NOT NULL,
+  `quiz3_cq` decimal(8,2) NOT NULL,
+  `quiz3_mcq` decimal(8,2) NOT NULL,
+  `quiz4_cq` decimal(8,2) NOT NULL,
+  `quiz4_mcq` decimal(8,2) NOT NULL,
+  `final_cq` decimal(8,2) NOT NULL,
+  `final_mcq` decimal(8,2) NOT NULL,
+  `att_mark` decimal(8,2) NOT NULL,
+  `student_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `teacher_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -359,7 +451,11 @@ INSERT INTO `subject_teachers` (`id`, `class`, `group`, `subject`, `section`, `t
 (2, '8', NULL, 'aaa', 'A', '1231', '2019-07-16 07:02:55', '2019-07-16 07:02:55'),
 (3, '8', NULL, 'ccc', 'A', '1231', '2019-07-16 07:02:55', '2019-07-16 07:02:55'),
 (4, '9', 'Science', 'aaa', 'A', '1231', '2019-07-19 06:25:50', '2019-07-19 06:25:50'),
-(5, '9', 'Science', 'ccc', 'A', '1231', '2019-07-19 06:25:50', '2019-07-19 06:25:50');
+(5, '9', 'Science', 'ccc', 'A', '1231', '2019-07-19 06:25:50', '2019-07-19 06:25:50'),
+(6, '9', 'Science', 'aaa', 'B', '1230', '2019-07-23 06:14:03', '2019-07-23 06:14:03'),
+(7, '9', 'Science', 'bbb', 'B', '1230', '2019-07-23 06:14:04', '2019-07-23 06:14:04'),
+(8, '9', 'Science', 'ccc', 'B', '1230', '2019-07-23 06:14:04', '2019-07-23 06:14:04'),
+(9, '9', 'Science', 'ddd', 'B', '1230', '2019-07-23 06:14:04', '2019-07-23 06:14:04');
 
 -- --------------------------------------------------------
 
@@ -388,7 +484,9 @@ CREATE TABLE `teachers` (
 INSERT INTO `teachers` (`id`, `teacher_id`, `teacher_name`, `email`, `phone`, `department`, `join_year`, `image`, `user_id`, `created_at`, `updated_at`) VALUES
 (2, '1231', 'Gomal monis', NULL, NULL, NULL, '2010', NULL, 'T-1231', '2019-07-14 05:37:28', '2019-07-14 05:37:28'),
 (3, '12234', 'Teacher1', NULL, NULL, NULL, '2010', NULL, 'T-12234', '2019-07-16 07:28:57', '2019-07-16 07:28:57'),
-(4, '1230', 'Teache2', NULL, NULL, 'Science', '2010', NULL, 'T-1230', '2019-07-16 07:41:56', '2019-07-16 07:41:56');
+(4, '1230', 'Teache2', NULL, NULL, 'Science', '2010', NULL, 'T-1230', '2019-07-16 07:41:56', '2019-07-16 07:41:56'),
+(5, '10111', 'Galib Sorkar', 'galib@email.com', '01234567890', NULL, '2005', NULL, 'T-10111', '2019-07-21 11:30:49', '2019-07-21 11:30:49'),
+(6, '10222', 'Mokam', 'test@email.com', '01234567890', 'Science', '2010', NULL, 'T-10222', '2019-07-21 14:48:59', '2019-07-21 14:48:59');
 
 -- --------------------------------------------------------
 
@@ -415,7 +513,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `user_id`, `user_name`, `password`, `type`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'Admin', '$2y$10$HhvsI8u5pFNIoTPbsg/gLOsUKsgU8B18O15kU4gc2a0bztlEJhQCm', 'admin', 'admin', NULL, '2019-07-13 11:14:13', '2019-07-13 11:14:13'),
 (3, 'Superadmin', 'Super Admin', '$2y$10$PEFmvKugKwf1PEaTzYAO0eaqT0MyOiS8cD/3Dvj2.2SgoHr2w8YY6', 'superadmin', 'superadmin', NULL, '2019-07-13 17:11:47', '2019-07-13 17:11:47'),
-(13, 'T-1231', 'Gomal monis', '$2y$10$VjeUpzrSUfP5D9JWsxY7FOb9wvc0VMXaTMyJVC4zAdGvaC61ft1Ma', 'teacher', 'none', NULL, '2019-07-14 05:37:27', '2019-07-14 05:37:27'),
+(13, 'T-1231', 'Gomal monis', '$2y$10$VjeUpzrSUfP5D9JWsxY7FOb9wvc0VMXaTMyJVC4zAdGvaC61ft1Ma', 'teacher', 'subject_teacher', NULL, '2019-07-14 05:37:27', '2019-07-14 05:37:27'),
 (33, 'T-12234', 'Teacher1', '$2y$10$FeyBquoDRyD/zBiKzj0Hkec4ZWREEX0UN/tCckyAyUwsQoTVQij9S', 'teacher', 'principal', NULL, '2019-07-16 07:28:57', '2019-07-16 07:28:57'),
 (34, 'T-1230', 'Teache2', '$2y$10$BJeBWgYvCPh4WfRsXdcoueOqHhN76FkVYVo96ak/.15Tn1/sZIK0O', 'teacher', 'vice_principal', NULL, '2019-07-16 07:41:56', '2019-07-16 07:41:56'),
 (37, 'S-111', 'Coma', '$2y$10$eU2kdMMK4Q7gVKS9qgnR5OQ.k6no1My9h/vJ9onwa.7HIjef9vzdS', 'student', 'none', NULL, '2019-07-16 15:20:19', '2019-07-16 15:20:19'),
@@ -425,7 +523,15 @@ INSERT INTO `users` (`id`, `user_id`, `user_name`, `password`, `type`, `role`, `
 (41, 'S-333', 'Lomon h', '$2y$10$v.YfCbFOELcH.zOf0Q7AieKX7U5LsnNq3bm1A1PiOM00uKf7fR78q', 'student', 'none', NULL, '2019-07-19 06:17:55', '2019-07-19 06:17:55'),
 (42, 'P-333', 'Parents', '$2y$10$w2yrp/tvW7/r5OQtserOfODZGiBXnDet7Q9Gd6JJR1wkDfTWQD2qW', 'parents', 'none', NULL, '2019-07-19 06:17:55', '2019-07-19 06:17:55'),
 (43, 'S-444', 'Dalim mia', '$2y$10$uCh915LRN2ALWOru21J.RexY/0UYxrou4ToA9Ew1gUFtiT2VFNzyO', 'student', 'none', NULL, '2019-07-19 07:05:53', '2019-07-19 07:05:53'),
-(44, 'P-444', 'Parents', '$2y$10$UGjBZQoP5yWj2ZG92MQ.zubZaxlaUh.AHKvgyNm9eJCxpiw99Com.', 'parents', 'none', NULL, '2019-07-19 07:05:53', '2019-07-19 07:05:53');
+(44, 'P-444', 'Parents', '$2y$10$UGjBZQoP5yWj2ZG92MQ.zubZaxlaUh.AHKvgyNm9eJCxpiw99Com.', 'parents', 'none', NULL, '2019-07-19 07:05:53', '2019-07-19 07:05:53'),
+(45, 'S-8111', 'Alom q', '$2y$10$xbXJ7e1.uK09s2jICKhu6.VVGzUXXX7EIWzLWaJT9zSMQSsI4y0Xa', 'student', 'none', NULL, '2019-07-20 04:42:10', '2019-07-20 04:42:10'),
+(46, 'P-8111', 'Parents', '$2y$10$dBLQnUjrMxq3dBdBRJnEYu9MW0hz8QfDcIZoxec1Ab7p/lWq0.bIW', 'parents', 'none', NULL, '2019-07-20 04:42:10', '2019-07-20 04:42:10'),
+(47, 'S-8112', 'Manik Sha', '$2y$10$T.pmxoFpjo4xSvjMf0CS1uQi8KJQG8ePy.vAzkSokAc3e./PVn4Lq', 'student', 'none', NULL, '2019-07-20 04:45:25', '2019-07-20 04:45:25'),
+(48, 'P-8112', 'Parents', '$2y$10$lzNXw110NqBVcdgdrbQqOeO1Sh40Kk9OuydTlZNhU/vww6rB2S/.K', 'parents', 'none', NULL, '2019-07-20 04:45:26', '2019-07-20 04:45:26'),
+(49, 'T-10111', 'Galib Sorkar', '$2y$10$t/rKjxLktaxwzIUmucUvSOq5/R1vnTyxGI1hehw9fHUG8WamBnzT2', 'teacher', 'co_odinator', NULL, '2019-07-21 11:30:49', '2019-07-21 11:30:49'),
+(50, 'T-10222', 'Mokam', '$2y$10$Z5XuWjdKaTD3zzZ3fKjMvuFS/vrQC/CCif2XbOAd5K9gZRuvvEkSC', 'teacher', 'subject_teacher', NULL, '2019-07-21 14:48:58', '2019-07-21 14:48:58'),
+(51, 'S-9111', 'Aomc', '$2y$10$PdDYKENG2R8wVwUrOofXou/9nMy5CHUM4ASLOUk1cLzGaKl/YGmAW', 'student', 'none', NULL, '2019-07-24 09:11:10', '2019-07-24 09:11:10'),
+(52, 'P-9111', 'Parents', '$2y$10$6wBlB8b22e7wEgc4P6N9u.R9.c4HJC7Exs8QQQygTvMkL1lcUxfOi', 'parents', 'none', NULL, '2019-07-24 09:11:11', '2019-07-24 09:11:11');
 
 -- --------------------------------------------------------
 
@@ -465,6 +571,12 @@ ALTER TABLE `class_section_lists`
 -- Indexes for table `class_subject_lists`
 --
 ALTER TABLE `class_subject_lists`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mark_distributions`
+--
+ALTER TABLE `mark_distributions`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -533,6 +645,14 @@ ALTER TABLE `stu_school_infos`
   ADD KEY `stu_school_infos_guide_teacher_foreign` (`guide_teacher`);
 
 --
+-- Indexes for table `subject_marks`
+--
+ALTER TABLE `subject_marks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subject_marks_teacher_id_foreign` (`teacher_id`),
+  ADD KEY `subject_marks_student_id_foreign` (`student_id`);
+
+--
 -- Indexes for table `subject_teachers`
 --
 ALTER TABLE `subject_teachers`
@@ -575,31 +695,37 @@ ALTER TABLE `class_attendances`
 -- AUTO_INCREMENT for table `class_section_lists`
 --
 ALTER TABLE `class_section_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `class_subject_lists`
 --
 ALTER TABLE `class_subject_lists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `mark_distributions`
+--
+ALTER TABLE `mark_distributions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `stu_attendances`
 --
 ALTER TABLE `stu_attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `stu_local_guardians`
@@ -617,37 +743,43 @@ ALTER TABLE `stu_main_guardians`
 -- AUTO_INCREMENT for table `stu_office_infos`
 --
 ALTER TABLE `stu_office_infos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `stu_parents`
 --
 ALTER TABLE `stu_parents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `stu_school_infos`
 --
 ALTER TABLE `stu_school_infos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `subject_marks`
+--
+ALTER TABLE `subject_marks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `subject_teachers`
 --
 ALTER TABLE `subject_teachers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `workers`
@@ -709,6 +841,13 @@ ALTER TABLE `stu_parents`
 ALTER TABLE `stu_school_infos`
   ADD CONSTRAINT `stu_school_infos_guide_teacher_foreign` FOREIGN KEY (`guide_teacher`) REFERENCES `teachers` (`teacher_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `stu_school_infos_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `subject_marks`
+--
+ALTER TABLE `subject_marks`
+  ADD CONSTRAINT `subject_marks_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`student_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `subject_marks_teacher_id_foreign` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`teacher_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `subject_teachers`

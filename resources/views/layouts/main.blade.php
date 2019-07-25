@@ -41,8 +41,24 @@
 
     <script src="{{ asset('assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
     
- 
+    {{-- swiper --}}
+    <script src="{{asset('assets/js/swiper.min.js')}}"></script>
+    <script>
+      var swiper = new Swiper('.swiper-container', {
+        effect: 'flip',
+        grabCursor: true,
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    </script>
+
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+  
 
     {{-- <script >
       $(document).ready(function() {

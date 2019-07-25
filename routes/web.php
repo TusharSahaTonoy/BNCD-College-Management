@@ -62,6 +62,16 @@ Route::get('select-section/{class}', 'SubjectTeacherController@selcet_section')-
 Route::post('subject-teacher/add', 'SubjectTeacherController@add_subject_teacher')->name('teacher.add_subject_teacher');
 
 
+//---------------------- Marks ---------------------------------
+Route::get('marks/give-marks', 'MarksController@subject_list_teacher')->name('marks.subject_list');
+
+Route::get('marks/give-marks/quiz/{subject}', 'MarksController@quiz_form')->name('marks.quiz.form');
+Route::post('marks/give-marks/quiz', 'MarksController@store_marks_quiz')->name('marks.quiz');
+
+Route::get('marks/give-marks/mid-final/{subject}', 'MarksController@subject_list_teacher')->name('marks.mid_final.form');
+Route::post('marks/give-marks/mid-final', 'MarksController@subject_list_teacher')->name('marks.mid_final');
+
+
 //----------------------- Attendance ----------------------------
 Route::get('attendance', 'AttendanceController@index')->name('attendance');
 
