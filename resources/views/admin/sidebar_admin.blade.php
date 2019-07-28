@@ -6,7 +6,7 @@
   <div class="collapse" id="user-forms">
     <ul class="nav nav-sm flex-column">
       <li class="nav-item"><a href=" {{route('user.index')}} " class="nav-link">All Users</a></li>
-      <li class="nav-item"><a href=" {{route('user.add_admin')}} " class="nav-link">Add Admin</a></li>
+      <li class="nav-item"><a href=" {{route('user.add_admin_form')}} " class="nav-link">Add Admin</a></li>
     </ul>
   </div>
 </li>
@@ -30,9 +30,10 @@
   </a>
   <div class="collapse" id="teacher-forms">
     <ul class="nav nav-sm flex-column">
+        <li class="nav-item"><a href=" {{route('teacher.index')}} " class="nav-link">All Teacher</a></li>
       <li class="nav-item"><a href=" {{route('teacher.add_teacher_form')}} " class="nav-link">Add Teacher</a></li>
-      <li class="nav-item"><a href=" {{route('teacher.index')}} " class="nav-link">All Teacher</a></li>
-      <li class="nav-item"><a href=" {{route('teacher.select_section_form')}} " class="nav-link">Assign Subject Teacher</a></li>
+      <li class="nav-item"><a href="{{route('teacher.sub_list')}}" class="nav-link">Assign Subject Teacher</a></li>
+      <li class="nav-item"><a href="{{route('teacher.sub_teachers')}}" class="nav-link">Subject Teacher List</a></li>
     </ul>
   </div>
 </li>
@@ -47,8 +48,8 @@
       <li class="nav-item"><a href=" {{route('subject.add_subject_list_form')}} " class="nav-link">Add Class Subjects</a></li>
       <li class="nav-item"><a href=" {{route('subject.view_list')}} " class="nav-link">View Class Subjects</a></li>
       
-      <li class="nav-item"><a href=" {{route('section.add_section_list_form')}} " class="nav-link">Add Class Sections</a></li>
-      <li class="nav-item"><a href=" {{route('section.add_section_list_form')}} " class="nav-link">View Class Sections</a></li>
+      {{-- <li class="nav-item"><a href=" {{route('section.add_section_list_form')}} " class="nav-link">Add Class Sections</a></li> --}}
+      {{-- <li class="nav-item"><a href=" {{route('section.add_section_list_form')}} " class="nav-link">View Class Sections</a></li> --}}
     </ul>
   </div>
 </li>

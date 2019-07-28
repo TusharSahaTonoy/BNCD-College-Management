@@ -36,7 +36,7 @@
                         <td>{{$sub->group}}</td>
                         <td>
                           <a href=" {{route('marks.quiz.form',$sub->class.','.$sub->group.','.$sub->subject.','.$sub->section)}} " class="btn btn-sm btn-default">Quiz</i></a>
-                          <a href=" {{route('marks.quiz.form',$sub->class.','.$sub->group.','.$sub->subject.','.$sub->section)}} " class="btn btn-sm btn-default">Mid & Final</i></a>
+                          <a href=" {{route('marks.mid_final.form',$sub->class.','.$sub->group.','.$sub->subject.','.$sub->section)}} " class="btn btn-sm btn-default">Mid & Final</i></a>
                         </td>
                       </tr>
                     @endforeach

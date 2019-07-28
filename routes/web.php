@@ -20,10 +20,10 @@ Route::get('/home', function () {
 });
 
 //---------------------- user -------------------------
-Route::get('user', 'UserController@index')->name('user.index');
+Route::get('users', 'UserController@index')->name('user.index');
 
-Route::get('admin/add', 'UserController@add_admin')->name('user.add_admin');
-Route::post('admin/add', 'Auth\RegisterController@register')->name('user.register');
+Route::get('admin/add', 'UserController@add_admin_form')->name('user.add_admin_form');
+Route::post('admin/add', 'UserController@add_admin')->name('user.register');
 
 Route::get('login', 'UserController@login_form')->name('user.loin_form');
 Route::get('login', 'UserController@login_form')->name('login');
@@ -56,8 +56,9 @@ Route::get('teacher/delete/{id}', 'TeacherController@delete_teacher')->name('tea
 
 //---------------------- Subject Teacher ------------------
 
-Route::get('select-section', 'SubjectTeacherController@selcet_section_form')->name('teacher.select_section_form');
-Route::get('select-section/{class}', 'SubjectTeacherController@selcet_section')->name('teacher.select_section');
+Route::get('teacher-assign', 'SubjectTeacherController@index')->name('teacher.sub_teachers');
+Route::get('teacher-assign/subject-list', 'SubjectTeacherController@sub_list_form')->name('teacher.sub_list');
+Route::get('teacher-assign/select-subject/{class}', 'SubjectTeacherController@select_sub')->name('teacher.select_subject');
 
 Route::post('subject-teacher/add', 'SubjectTeacherController@add_subject_teacher')->name('teacher.add_subject_teacher');
 
@@ -66,10 +67,10 @@ Route::post('subject-teacher/add', 'SubjectTeacherController@add_subject_teacher
 Route::get('marks/give-marks', 'MarksController@subject_list_teacher')->name('marks.subject_list');
 
 Route::get('marks/give-marks/quiz/{subject}', 'MarksController@quiz_form')->name('marks.quiz.form');
-Route::post('marks/give-marks/quiz', 'MarksController@store_marks_quiz')->name('marks.quiz');
+Route::post('marks/give-marks/quiz', 'MarksController@store_marks_quiz')->name('marks.quiz.store');
 
-Route::get('marks/give-marks/mid-final/{subject}', 'MarksController@subject_list_teacher')->name('marks.mid_final.form');
-Route::post('marks/give-marks/mid-final', 'MarksController@subject_list_teacher')->name('marks.mid_final');
+Route::get('marks/give-marks/mid-final/{subject}', 'MarksController@mid_final_form')->name('marks.mid_final.form');
+Route::post('marks/give-marks/mid-final', 'MarksController@store_marks_mid_final')->name('marks.mid_final.store');
 
 
 //----------------------- Attendance ----------------------------
@@ -95,16 +96,18 @@ Route::post('student/add', 'StudentController@add_student')->name('student.add_s
 Route::get('student/view/{id}', 'StudentController@view_student')->name('student.view_student');
 Route::get('student/edit/', 'StudentController@view_student')->name('student.edit_student');
 
-Route::get('student/attendence/all', 'StudentController@view_all_attendance')->name('student.view_all_attendance');
+Route::get('student/attendence', 'StudentController@view_all_attendance')->name('student.view_all_attendance');
+
+Route::get('student/marks', 'StudentController@view_marks')->name('student.view_marks');
 
 //--------------------------- parents ----------------------------------
 Route::get('parents/student-attendance','ParentsController@stu_att_summary')->name('parents.student_attendance');
 
-
+Route::get('parents/student-marks','ParentsController@view_marks_stu')->name('parents.student_marks');
 
 //------------------------- section list ---------------------------------
-Route::get('section-list/add', 'SectionListController@add_section_list_form')->name('section.add_section_list_form');
-Route::post('section-list/add', 'SectionListController@add_section_list')->name('section.add_section_list');
+// Route::get('section-list/add', 'SectionListController@add_section_list_form')->name('section.add_section_list_form');
+// Route::post('section-list/add', 'SectionListController@add_section_list')->name('section.add_section_list');
 
 
 

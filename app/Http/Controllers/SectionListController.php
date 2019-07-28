@@ -42,4 +42,6 @@ class SectionListController extends Controller
         return redirect('/');
         
     }
+
+    // public function add_section_list_form()
 }

@@ -28,7 +28,7 @@
           <div class="card-body px-lg-5 py-lg-5">
             <form role="form" action="{{ route('teacher.edit_teacher') }}" method="POST">
               @csrf
-              <input type="hidden" class="form-control" name="id" value="{{ $id }}" >
+              <input type="hidden" class="form-control" name="user_id" value="{{ $teacher->user_id }}" >
               
               <div class="form-group">
                 <div class="input-group input-group-alternative mb-3">
@@ -39,6 +39,19 @@
                 </div>
               </div>
               
+              <div class="form-group row">
+                  <div class="input-group input-group-alternative mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"></span>
+                    </div>
+                    <select name="role" class="form-control" required>
+                      <option value="principal" {{ (($teacher->user->role=='principal')? "selected": "") }} >Principal</option>
+                      <option value="vice_principal" {{ (($teacher->user->role=='vice_principal')? "selected": "") }}>Vice Principal</option>
+                      <option value="co_odinator" {{ (($teacher->user->role=='co_odinator')? "selected": "") }}>Co-Odinator</option>
+                      <option value="subject_teacher" {{ (($teacher->user->role=='subject_teacher')? "selected": "") }}>Subject Teacher</option>
+                    </select>
+                  </div>
+                </div>
 
               <div class="form-group">
                 <div class="input-group input-group-alternative mb-3">

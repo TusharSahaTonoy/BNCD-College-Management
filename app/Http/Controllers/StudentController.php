@@ -15,8 +15,9 @@ use App\Student;
 use App\Student\StuParents;
 use App\Student\StuOfficeInfo;
 use App\Student\StuSchoolInfo;
-use App\Student\StuAttendance;
 
+use App\Student\StuAttendance;
+use App\SubjectMarks;
 
 use App\Teacher;
 
@@ -232,8 +233,6 @@ class StudentController extends Controller
 
         $all_attendance = StuAttendance::where('student_id',$student_id)->get();
 
-
-
         
         $persent_counts = DB::table('stu_attendances')->selectRaw('subject,count(attendance) as present, teacher_id')->where([
             'student_id' => $student_id, 
@@ -248,5 +247,24 @@ class StudentController extends Controller
         // $persent_counts
         // return $all_attendance;
         return view('student.summary_att_student',compact('all_attendance'));
+    }
+
+    public function view_marks()
+    {
+        if(!(in_array(auth()->user()->type ,array("student")))) {
+            return redirect('/')->with('error','You have to be a student');
+        }
+
+        $student_id = auth()->user()->student->student_id;
+        $student = StuSchoolInfo::where('student_id',$student_id)->first();
+        // return $student;
+        $marks = SubjectMarks::where([
+            'student_id' => $student->student_id,
+            'class' => $student->class,
+            'group' => $student->group,
+        ])->get();
+
+        // return $marks;
+        return view('student.marks_stu',compact('marks'));
     }
 }

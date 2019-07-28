@@ -42,9 +42,6 @@
           </div> 
         </div>
       </div>
-			{{-- <div class="form-group row justify-content-center">
-          <img src="{{/* secure_ */asset('/storage/student/s1563977599.png')}}" alt="Page3">
-      </div> --}}
 		</form>
 	</div>
 @endsection

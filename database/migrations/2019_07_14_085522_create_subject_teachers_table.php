@@ -19,7 +19,7 @@ class CreateSubjectTeachersTable extends Migration
             $table->string('group')->nullable();
             $table->string('subject');
             $table->string('section');
-            $table->string('teacher_id');
+            $table->string('teacher_id')->nullable();
             $table->timestamps();
 
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers')->onDelete('cascade');

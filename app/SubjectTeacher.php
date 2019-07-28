@@ -11,4 +11,9 @@ class SubjectTeacher extends Model
     protected $fillable = [
         'class','group','subject','section','teacher_id'
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo('App\Teacher', 'teacher_id','teacher_id');
+    }
 }

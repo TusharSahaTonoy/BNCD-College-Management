@@ -21,6 +21,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Student Roll</th>
                     <th scope="col">Class</th>
+                    <th scope="col">Group</th>
                     <th scope="col">Section</th>
                     <th scope="col">Action</th>
                   </tr>
@@ -31,6 +32,7 @@
                       <td>{{$student->student_name}}</td>
                       <td>{{$student->student_id}}</td>
                       <td>{{$student->office->class}}</td>
+                      <td>{{$student->office->group}}</td>
                       <td>{{$student->office->section}}</td>
                       <td></td>
                     </tr>

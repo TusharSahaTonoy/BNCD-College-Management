@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Teacher;
+use App\Student\StuSchoolInfo;
+
 use App\ClassSectionList;
 use App\ClassSubjectList;
 
@@ -26,56 +28,78 @@ class SubjectTeacherController extends Controller
 
     public function index()
     {
-        
+        $sub_teachers = SubjectTeacher::all();
+        // return $sub_teachers;
+        return view('teacher.sub_teacher_list',compact('sub_teachers'));
     }
-    public function selcet_section_form()
+    public function sub_list_form()
     {
-        $subject_classes = ClassSubjectList::select('class','group')->groupby('class','group')->get();
-        // return $subject_classes;
-        foreach($subject_classes as $subject)
-        {
-            $all_classes[] = ClassSectionList::where('class',$subject->class)
-                                            ->orWhere('group',$subject->group)->get();
-        }
-        // return $all_classes;
-        return view('teacher.select_section',compact('all_classes'));
+        $subjects = ClassSubjectList::all();
+
+        // return $subjects;
+        // foreach($subjects as $index => $subject)
+        // {
+        //     $subjects[$index]['sec_list'] = StuSchoolInfo::select('section')->where([
+        //         'class'=>$subject->class,
+        //         'group'=> ($subject->group==null)? null : $subject->group
+        //         ])->get();
+        // }
+        // return $subjects;
+        return view('teacher.subject_list',compact('subjects'));
     }
 
-    public function selcet_section($class)
-    {   //class,group,section
-        $assign = explode(",", $class);
-        $class = $assign[0];
-        $group = $assign[1];
-        $section = $assign[2];
-        $subjects = ClassSubjectList::select('subject')->where([
+    public function select_sub($sub)
+    {   
+        // 7,,Bangla
+        // return $sub;
+        //class,group,section
+
+        list($class,$group,$subject) = explode(",", $sub);
+
+        $sec_list = StuSchoolInfo::select('section')->where([
             'class'=>$class,
             'group'=> ($group==null)? null : $group
             ])->get();
+        
+        foreach($sec_list as $sec)
+        {
+            $sub_teachers[] = SubjectTeacher::firstOrCreate([
+                'class' => $class,
+                'group' => ($group == null)? null : $group,
+                'subject' =>$subject,
+                'section' => $sec->section,
+            ],
+            [
+                'teacher_id' =>null,
+            ]); 
+        }
 
-        return view('teacher.assign_subject_teacher',compact('class','group','section','subjects'));
+        // return $sub_teachers;
+        //teacher list 
+        $teachers = Teacher::all();
+
+        return view('teacher.assign_subject_teacher',compact('sub_teachers','teachers','class','group','subject'));
 
     }
     
     public function add_subject_teacher(Request $request)
     {
-        // return $request;
-
-        //error check if already added
-        for($i = 0; $i<sizeof($request->sub_list); $i++ )
+        for($i = 0; $i<sizeof($request->sec_list); $i++ )
         {
             if($request->teacher_list[$i] ==null)
             {
                 continue;
             }
 
-            SubjectTeacher::create([
-                'class' => $request->sub_class,
-                'group' => $request->sub_group,
-                'section' =>$request->sub_section,
-                'subject' => $request->sub_list[$i],
+            SubjectTeacher::where([
+                'class' => $request->class,
+                'group' => ($request->group == null)? null : $request->group,
+                'subject' =>$request->subject,
+                'section' => $request->sec_list[$i],
+            ])->update([
                 'teacher_id' =>$request->teacher_list[$i],
             ]);
         }
-       return redirect('/');
+       return redirect('/teacher-assign')->with('success','changes are made');
     }
 }

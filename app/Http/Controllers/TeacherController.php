@@ -89,7 +89,7 @@ class TeacherController extends Controller
 
     public function edit_teacher_form($id)
     {
-        if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin"))))
         {
             return redirect('/')->with('error','Invalid User');
         }
@@ -97,22 +97,42 @@ class TeacherController extends Controller
         $teacher = Teacher::find($id);
         return view('teacher.edit_teacher',compact('teacher','id'));
     }
+
     public function edit_teacher(Request $request)
     {
-        if (!(in_array(auth()->user()->type ,array("superadmin","admin","vice_principal","principal","co_odinetor","worker"))))
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin"))))
         {
             return redirect('/')->with('error','Invalid User');
         }
 
-        $teacher = Teacher::find($request->id);
-        $teacher->teacher_name = $request->teacher_name;
-        $teacher->email =$request->email;
-        $teacher->phone =$request->phone;
-        $teacher->department =$request->department;
-        $teacher->join_year =$request->join_year;
+        // return $request;
 
-        $teacher->save();
+        // $teacher = Teacher::find($request->id);
+        // $teacher->teacher_name = $request->teacher_name;
+        // $teacher->user->role = $request->role;
+        // $teacher->email =$request->email;
+        // $teacher->phone =$request->phone;
+        // $teacher->department =$request->department;
+        // $teacher->join_year =$request->join_year;
 
-        return redirect('/teacher');
+        // $teacher->save();
+
+        Teacher::where([
+            'user_id' => $request->user_id,
+        ])->update([
+            'teacher_name' => $request->teacher_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'department' => $request->department,
+            'join_year' =>$request->join_year,
+        ]);
+
+        User::where([
+            'user_id'=>$request->user_id,
+        ])->update([
+            'role' => $request->role
+        ]);
+
+        return redirect('/teacher')->with('success','Teacher Edited');
     }
 }

@@ -133,15 +133,15 @@
                     <td>{{ $attendance->student->office->roll}}</td>
                     <td>
                       @switch($attendance->attendance)
-                          @case(0)
-                            Absent
-                            @break
                           @case(1)
-                          Present
+                            <span class="badge badge-pill badge-success">Present</span>    
+                              @break
+                          @case(0)
+                            <span class="badge badge-pill badge-danger">Absent</span>   
                             @break
                           @case(2)
-                            Leave
-                            @break    
+                            <span class="badge badge-pill badge-warning">Leave</span>   
+                            @break   
                           @default
                           {{$attendance->attendance}}
                       @endswitch  

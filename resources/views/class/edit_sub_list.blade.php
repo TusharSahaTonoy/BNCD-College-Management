@@ -16,8 +16,8 @@
               <div class="col-lg-4">
                 <div class="form-group focused">
                   <label class="form-control-label" for="input-first-name">Class</label>
-                  <select id="stu_class" class="form-control form-control-alternative selectpicker" name="sub_class" placeholder="" required>
-                    <option value="{{old('sub_class')}}">{{old('sub_class')}}</option>
+                  <select id="stu_class" class="form-control form-control-alternative selectpicker" name="stu_class" placeholder="" required>
+                    <option value="{{old('stu_class')}}">{{old('stu_class')}}</option>
                     @foreach (range(1, 12) as $class)
                       <option value="{{$class}}">{{$class}}</option>
                     @endforeach
@@ -27,8 +27,8 @@
               <div class="col-lg-4">
                 <div class="form-group focused">
                   <label class="form-control-label" for="input-last-name">Group</label>
-                  <select id="stu_group" class="form-control form-control-alternative" name="sub_group" placeholder="" >
-                    <option value="{{old('sub_group')}}">{{old('sub_group')}}</option>
+                  <select id="stu_group" class="form-control form-control-alternative" name="stu_group" placeholder="" >
+                    <option value="{{old('stu_group')}}">{{old('stu_group')}}</option>
                     <option value="Science">Science</option>
                     <option value="Commerce">Commerce</option>
                     <option value="Arts">Arts</option>

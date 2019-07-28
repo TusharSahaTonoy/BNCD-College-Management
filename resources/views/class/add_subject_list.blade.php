@@ -15,14 +15,24 @@
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group focused">
-                  <label class="form-control-label" for="input-username">Class</label>
-                  <input type="text"  class="form-control form-control-alternative" name="sub_class" placeholder="">
+                  <label class="form-control-label" for="input-first-name">Class</label>
+                  <select id="stu_class" class="form-control form-control-alternative selectpicker" name="sub_class" placeholder="" required>
+                    <option value="{{old('stu_class')}}">{{old('stu_class')}}</option>
+                    @foreach ($classes as $class)
+                      <option value="{{$class->class}}">{{$class->class}}</option>
+                    @endforeach
+                  </select>
                 </div>
               </div>
               <div class="col-lg-4">
-                <div class="form-group">
-                  <label class="form-control-label" for="input-email">Group</label>
-                  <input type="text"  class="form-control form-control-alternative" name="sub_group" placeholder="">
+                <div class="form-group focused">
+                  <label class="form-control-label" for="input-last-name">Group</label>
+                  <select id="stu_group" class="form-control form-control-alternative" name="sub_group" placeholder="" >
+                    <option value="{{old('stu_group')}}">{{old('stu_group')}}</option>
+                    <option value="Science">Science</option>
+                    <option value="Commerce">Commerce</option>
+                    <option value="Arts">Arts</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -62,4 +72,20 @@
     </form>
   </div>
 
+
+  <script>
+    $('#stu_group').prop('disabled', 'disabled');
+    $('#stu_class').on('change', function() {
+      if(this.value<9)
+      {
+        $('#stu_group').prop('disabled', 'disabled');
+      }
+      else
+      {
+        $('#stu_group').prop('disabled', false);
+        $('#stu_group option[value=""]').attr('selected','selected');        
+      }
+    });
+
+  </script>
 @endsection

@@ -17,7 +17,7 @@
   <link href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
   <!-- Argon CSS -->
-  <link type="text/css" href="{{asset('assets/css/argon.css?v=1.0.0')}}" rel="stylesheet">
+  <link type="text/css" href="{{asset('assets/css/argon.min.css?v=1.0.0')}}" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 

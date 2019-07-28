@@ -1,4 +1,4 @@
-<li class="nav-item">
+{{-- <li class="nav-item">
   <a class="nav-link" href=" {{route('dashboard')}} ">
     <i class="ni ni-tv-2 text-primary"></i> Guided Students
   </a>
@@ -8,7 +8,7 @@
   <a class="nav-link" href=" {{route('dashboard')}} ">
     <i class="ni ni-tv-2 text-primary"></i> All student marks
   </a>
-</li>
+</li> --}}
 
 <li class="nav-item">
   <a class="nav-link active collapsed" href="#attendance-forms" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-forms">
@@ -32,8 +32,6 @@
   <div class="collapse" id="marks-forms">
     <ul class="nav nav-sm flex-column">
       <li class="nav-item"><a href=" {{ route('marks.subject_list') }} " class="nav-link">Give Marks</a></li>
-      <li class="nav-item"><a href=" {{ route('attendance') }} " class="nav-link">Mid Marks</a></li>
-      <li class="nav-item"><a href="  " class="nav-link">Final Marks</a></li>
     </ul>
   </div>
 </li>
