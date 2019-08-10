@@ -31,7 +31,10 @@
     
     <!-- Argon Scripts -->
     <!-- Core -->
-    
+
+    <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
+
     <script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <!-- Optional JS -->
     <script src="{{asset('assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
@@ -46,7 +49,7 @@
     <script>
       var swiper = new Swiper('.swiper-container', {
         effect: 'flip',
-        grabCursor: true,
+        grabCursor: false,
         pagination: {
           el: '.swiper-pagination',
         },
@@ -55,17 +58,13 @@
           prevEl: '.swiper-button-prev',
         },
       });
+
+      // $("#check-boxes").click(function(){
+      //   // console.log('div clicked');
+      //   swiper.next();
+      // });
+
     </script>
-
-  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
-  
-
-    {{-- <script >
-      $(document).ready(function() {
-          $('#example').DataTable();
-      } );
-    </script> --}}
-
 
   </body>
 

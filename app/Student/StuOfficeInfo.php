@@ -9,7 +9,7 @@ class StuOfficeInfo extends Model
     protected $table = 'stu_office_infos';
 
     protected $fillable = [
-        'class','group','section','roll','nomination_count','security_code','student_id'
+        'board_id','class','group','section','roll','admission_date','nomination_count','security_code','student_id'
     ];
 
     public function student()

@@ -8,7 +8,6 @@
   
   <!-- Favicon -->
     <link href=" {{asset('assets/img/brand/favicon.png')}}" rel="icon" type="image/png">
-    <script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 
   <!-- Fonts -->
 
@@ -18,8 +17,6 @@
   <link href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="{{asset('assets/css/argon.min.css?v=1.0.0')}}" rel="stylesheet">
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 
   {{-- swiper --}}
   <link type="text/css" href="{{asset('assets/css/swiper.min.css')}}" rel="stylesheet">

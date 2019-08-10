@@ -33,7 +33,7 @@
     <div class="col-lg-4">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Income</label>
-        <input type="text"  class="form-control form-control-alternative" name="father_income" value="{{ old('father_income') }}" placeholder="">
+        <input type="number"  class="form-control form-control-alternative" name="father_income" value="{{ old('father_income') }}" placeholder="">
       </div>
     </div>
   </div>
@@ -49,13 +49,14 @@
         @enderror
       </div>
     </div>
-    {{-- <div class="col-lg-7">
+
+    <div class="col-lg-7">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Father Image</label>
           <input type="file" class="form-control form-control-alternative" name="father_image" required class="custom-file-input" id="image" value="{{ old('father_image') }}" onchange="document.getElementById('father_image').src = window.URL.createObjectURL(this.files[0])">
           <img id="father_image" width="200px" />
       </div>
-    </div> --}}
+    </div>
 
   </div>
 
@@ -93,7 +94,7 @@
     <div class="col-lg-4">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Income</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_income" value="{{ old('mother_income') }}" placeholder="">
+        <input type="number"  class="form-control form-control-alternative" name="mother_income" value="{{ old('mother_income') }}" placeholder="">
       </div>
     </div>
   </div>
@@ -104,11 +105,14 @@
         <input type="number" class="form-control form-control-alternative" name="mother_mobile" value="{{ old('mother_mobile') }}" minlength="11" maxlength="14" placeholder="" required>
       </div>
     </div>
-    {{-- <div class="col-lg-7">
+    
+    <div class="col-lg-7">
       <div class="form-group focused">
-        <label class="form-control-label" for="input-username">Mother Image Image</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_image" value="{{ old('mother_image') }}" placeholder="">
+        <label class="form-control-label" for="input-username">Mother Image</label>
+          <input type="file" class="form-control form-control-alternative" name="mother_image" required class="custom-file-input" id="image" value="{{ old('mother_image') }}" onchange="document.getElementById('mother_image').src = window.URL.createObjectURL(this.files[0])">
+          <img id="mother_image" width="200px" />
       </div>
-    </div> --}}
+    </div>
+
   </div>
 </div>

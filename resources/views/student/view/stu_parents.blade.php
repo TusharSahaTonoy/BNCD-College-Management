@@ -4,7 +4,7 @@
     <div class="col-lg-12">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Father Name</label>
-        <input type="text"  class="form-control form-control-alternative" name="father_name" value="{{ old('father_name') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="father_name" value="{{((old('father_name')== null)? $student->parents->father_name : old('father_name')) }}" placeholder="" required>
       </div>
     </div>
   </div>
@@ -12,13 +12,14 @@
     <div class="col-lg-6">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Occupation</label>
-        <input type="text"  class="form-control form-control-alternative" name="father_occ" value="{{ old('father_occ') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="father_occ" value="{{((old('father_occ')== null)? $student->parents->father_occu : old('father_occ')) }}" placeholder=""
+        >
       </div>
     </div>
     <div class="col-lg-6">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Position</label>
-        <input type="text"  class="form-control form-control-alternative" name="father_pos" value="{{ old('father_pos') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="father_pos" value="{{((old('father_pos')== null)? $student->parents->father_position : old('father_pos')) }}" placeholder="">
       </div>
     </div>
   </div>
@@ -26,13 +27,13 @@
     <div class="col-lg-8">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Institute Name</label>
-        <input type="text"  class="form-control form-control-alternative" name="father_ins" value="{{ old('father_ins') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="father_ins" value="{{((old('father_ins')== null)? $student->parents->father_ins : old('father_ins')) }}" placeholder="">
       </div>
     </div>
     <div class="col-lg-4">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Income</label>
-        <input type="text"  class="form-control form-control-alternative" name="father_income" value="{{ old('father_income') }}" placeholder="">
+        <input type="number"  class="form-control form-control-alternative" name="father_income" value="{{((old('father_income')== null)? $student->parents->father_income : old('father_income')) }}" placeholder="">
       </div>
     </div>
   </div>
@@ -40,15 +41,23 @@
     <div class="col-lg-5">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Mobile No.</label>
-        <input type="number" class="form-control form-control-alternative" name="father_mobile" value="{{ old('father_mobile') }}" placeholder="">
+        <input type="number" class="form-control form-control-alternative" name="father_mobile" value="{{((old('father_mobile')== null)? $student->parents->father_mobile : old('father_mobile')) }}" minlength="11" maxlength="14" placeholder="" required>
+        @error('father_mobile')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+        @enderror
       </div>
     </div>
+
     <div class="col-lg-7">
       <div class="form-group focused">
-        <label class="form-control-label" for="input-username">Father Image Image</label>
-        <input type="text"  class="form-control form-control-alternative" name="father_image" value="{{ old('father_image') }}" placeholder="">
+        <label class="form-control-label" for="input-username">Father Image</label>
+          <input type="file" class="form-control form-control-alternative" name="father_image" required class="custom-file-input" id="image" onchange="document.getElementById('father_image').src = window.URL.createObjectURL(this.files[0])">
+          <img id="stu_image" width="200px" src="{{ asset('/storage/students/father/'.$student->parents->father_image) }}" />
       </div>
     </div>
+
   </div>
 
   <br>
@@ -57,7 +66,7 @@
     <div class="col-lg-12">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Mother Name</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_name" value="{{ old('mother_name') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="mother_name" value="{{((old('mother_name')== null)? $student->parents->mother_name : old('mother_name')) }}" placeholder="" required>
       </div>
     </div>
   </div>
@@ -65,13 +74,13 @@
     <div class="col-lg-6">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Occupation</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_occ" value="{{ old('mother_occ') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="mother_occ" value="{{((old('mother_occ')== null)? $student->parents->mother_occu : old('mother_occ')) }}" placeholder="">
       </div>
     </div>
     <div class="col-lg-6">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Position</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_pos" value="{{ old('mother_pos') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="mother_pos" value="{{((old('mother_pos')== null)? $student->parents->mother_position : old('mother_pos')) }}" placeholder="">
       </div>
     </div>
   </div>
@@ -79,13 +88,13 @@
     <div class="col-lg-8">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Institute Name</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_ins" value="{{ old('mother_ins') }}" placeholder="">
+        <input type="text"  class="form-control form-control-alternative" name="mother_ins" value="{{((old('mother_ins')== null)? $student->parents->mother_ins : old('mother_ins')) }}" placeholder="">
       </div>
     </div>
     <div class="col-lg-4">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Income</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_income" value="{{ old('mother_income') }}" placeholder="">
+        <input type="number"  class="form-control form-control-alternative" name="mother_income" value="{{((old('mother_income')== null)? $student->parents->mother_income : old('mother_income')) }}" placeholder="">
       </div>
     </div>
   </div>
@@ -93,14 +102,17 @@
     <div class="col-lg-5">
       <div class="form-group focused">
         <label class="form-control-label" for="input-username">Mobile No.</label>
-        <input type="number" class="form-control form-control-alternative" name="mother_mobile" value="{{ old('mother_mobile') }}" placeholder="">
+        <input type="number" class="form-control form-control-alternative" name="mother_mobile" value="{{((old('mother_mobile')== null)? $student->parents->mother_mobile : old('mother_mobile')) }}" minlength="11" maxlength="14" placeholder="" required>
       </div>
     </div>
+    
     <div class="col-lg-7">
       <div class="form-group focused">
-        <label class="form-control-label" for="input-username">Mother Image Image</label>
-        <input type="text"  class="form-control form-control-alternative" name="mother_image" value="{{ old('mother_image') }}" placeholder="">
+        <label class="form-control-label" for="input-username">Mother Image</label>
+          <input type="file" class="form-control form-control-alternative" name="mother_image" required class="custom-file-input" id="image" onchange="document.getElementById('mother_image').src = window.URL.createObjectURL(this.files[0])">
+          <img id="stu_image" width="200px" src="{{ asset('/storage/students/mother/'.$student->parents->mother_image) }}" />
       </div>
     </div>
+
   </div>
 </div>

@@ -39,9 +39,9 @@
                         <span class="font-weight-light"></span>
                       </h3>
                       <div class="form-check form-check-inline att-slide">
-                        <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="1" id="{{ $student->student_id }}" ><label class="form-check-label">Present</label> &nbsp
-                        <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="0" checked id="{{ $student->student_id }}"><label class="form-check-label">Absent</label> &nbsp
-                        <input class="form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="2" id="{{ $student->student_id }}"><label class="form-check-label">Leave</label> &nbsp
+                        <input class="check-boxes form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="1" id="{{ $student->student_id }}" ><label class="form-check-label">Present</label> &nbsp
+                        <input class="check-boxes form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="0" checked id="{{ $student->student_id }}"><label class="form-check-label">Absent</label> &nbsp
+                        <input class="check-boxes form-check-input" type="radio" name="att_list[{{ $student->student_id }}]" value="2" id="{{ $student->student_id }}"><label class="form-check-label">Leave</label> &nbsp
                       </div>
 
                       {{-- <input type="hidden" name="student_list[]" value="{{ $info->student_id }}"> --}}
@@ -93,7 +93,12 @@
   }
   </style>
 
-
+  <script>
+    $(".check-boxes").click(function(){
+      // console.log('pressed');
+      $(".swiper-button-next").click();
+    });
+  </script>
 
 @endsection
 

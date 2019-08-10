@@ -19,7 +19,7 @@
     <ul class="nav nav-sm flex-column">
       <li class="nav-item"><a href=" {{route('student.add_student_form')}} " class="nav-link">Add Student</a></li>
       <li class="nav-item"><a href=" {{route('student.index')}} " class="nav-link">All Student</a></li>
-      <li class="nav-item"><a href=" {{route('student.index')}} " class="nav-link">Change Guide Teacher</a></li>
+      {{-- <li class="nav-item"><a href=" {{route('student.index')}} " class="nav-link">Change Guide Teacher</a></li> --}}
     </ul>
   </div>
 </li>

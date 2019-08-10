@@ -19,6 +19,7 @@ class CreateStuOfficeInfosTable extends Migration
             $table->string('group')->nullable();
             $table->string('section');
             $table->string('roll');
+            $table->date('admission_date');
             $table->string('nomination_count')->nullable();
             $table->string('security_code')->nullable();
             $table->string('student_id')->unique();

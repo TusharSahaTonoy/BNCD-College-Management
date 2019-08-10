@@ -93,8 +93,8 @@ Route::get('student', 'StudentController@index')->name('student.index');
 Route::get('student/add', 'StudentController@add_student_form')->name('student.add_student_form');
 Route::post('student/add', 'StudentController@add_student')->name('student.add_student');
 
-Route::get('student/view/{id}', 'StudentController@view_student')->name('student.view_student');
-Route::get('student/edit/', 'StudentController@view_student')->name('student.edit_student');
+Route::get('student/view/{id}', 'StudentController@view_student')->name('student.view');
+Route::post('student/edit/', 'StudentController@edit_student')->name('student.edit_student');
 
 Route::get('student/attendence', 'StudentController@view_all_attendance')->name('student.view_all_attendance');
 

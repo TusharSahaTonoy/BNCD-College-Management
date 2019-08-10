@@ -53,11 +53,26 @@ class TeacherController extends Controller
             return redirect('/')->with('error','Invalid User');
         }
 
+
         $user = User::where('user_id','T-'. $request->teacher_id)->first();
         if(!empty($user))
         {
             return redirect()->back()->with('error','Teacher Alreadey added')->withInput();
         }
+
+        if($request->role=='principal')
+        {
+            $have_principal = User::where('role',$request->role)->first(); 
+            if(!empty($have_principal))
+            {
+                return redirect()->back()->with('error','Alreadey Have A Principal')->withInput();
+            }
+        }
+
+        $this->validate($request,[
+            'phone'   => 'required|max:14|min:11|max:14',
+            'teacher_image' => 'required|image|max:5000',
+        ]);
 
         // return $request;
         $user = User::create([
@@ -68,6 +83,9 @@ class TeacherController extends Controller
             'role' => $request->role,
         ]);
         
+        $ext = $request->file('teacher_image')->getClientOriginalExtension();
+        $teacher_img = 't'.time().'.'.$ext;
+
         Teacher::create([
             'teacher_id' => $request->teacher_id,
             'teacher_name' => $request->teacher_name,
@@ -75,15 +93,23 @@ class TeacherController extends Controller
             'phone'=> $request->phone,
             'department' => $request->department,
             'join_year'=> $request->join_year,
+            'image' => $teacher_img,
             'user_id'=>$user->user_id
         ]);
+        $request->file('teacher_image')->storeAs('public/teachers',$teacher_img);
 
         return redirect('/')->with('success','Teacher Added Successfully');
     }
 
     public function view_teacher($id)
     {
+        if (!(in_array(auth()->user()->type ,array("superadmin","admin"))))
+        {
+            return redirect('/')->with('error','Invalid User');
+        }
+        
         $teacher = Teacher::find($id);
+        // return $teacher;
         return view('teacher.view_teacher',compact('teacher'));
     }
 
@@ -104,18 +130,6 @@ class TeacherController extends Controller
         {
             return redirect('/')->with('error','Invalid User');
         }
-
-        // return $request;
-
-        // $teacher = Teacher::find($request->id);
-        // $teacher->teacher_name = $request->teacher_name;
-        // $teacher->user->role = $request->role;
-        // $teacher->email =$request->email;
-        // $teacher->phone =$request->phone;
-        // $teacher->department =$request->department;
-        // $teacher->join_year =$request->join_year;
-
-        // $teacher->save();
 
         Teacher::where([
             'user_id' => $request->user_id,

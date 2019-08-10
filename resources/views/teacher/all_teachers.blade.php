@@ -14,7 +14,7 @@
           </div>
           <div class="card-body px-lg-5 py-lg-5">
             <div class="table-responsive">
-              <table class="table align-items-center table-flush text-center display" id="example"  style="width:100%">
+              <table id="mytable" class="table align-items-center table-flush text-center display" style="width:100%">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -45,4 +45,5 @@
       </div>
     </div>
   </div>
+
 @endsection

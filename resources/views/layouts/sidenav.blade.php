@@ -89,7 +89,7 @@
       <!-- Navigation -->
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href=" {{route('dashboard')}} ">
+          <a class="nav-link" href="{{route('dashboard')}} ">
             <i class="ni ni-tv-2 text-primary"></i> Dashboard
           </a>
         </li>
@@ -99,22 +99,7 @@
           @endif
 
           @if (Auth::user()->type == 'teacher')
-
-            @switch(Auth::user()->role)
-                @case('principal')
-                  @include('teacher.principal.sidebar_principal')      
-                  @break
-
-                @case('vice_principal')
-                  @include('teacher.vice_principal.sidebar_vice_principal')
-                  @break
-
-                @case('co_odinator')
-                  @include('teacher.co_odinator.sidebar_co_odinator')
-                  @break
-                @default
-                  @include('teacher.sidebar_teacher')
-            @endswitch
+            @include('teacher.sidebar_teacher')
           @endif
 
           @if (Auth::user()->type == 'student')

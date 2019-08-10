@@ -19,6 +19,11 @@ class Student extends Model
         return $this->belongsTo('App\User', 'user_id','user_id');
     }
 
+    public function parents()
+    {
+        return $this->hasOne(Student\StuParents::class, 'student_id', 'student_id');
+    }
+
     public function office()
     {
         // return $this->hasOne(StuOfficeInfo::class, 'student_id', 'student_id'); //works with use app\...

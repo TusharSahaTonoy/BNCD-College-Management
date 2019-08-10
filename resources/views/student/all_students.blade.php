@@ -13,13 +13,13 @@
           </div>
           <div class="card-body px-lg-5 py-lg-5">
             <div class="table-responsive"><br>
-              <table class="table align-items-center table-flush text-center display" id="example"  style="width:100%">
+              <table class="table align-items-center table-flush text-center display" id="example" style="width:100%">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">User Id</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Student Roll</th>
+                    <th scope="col">Roll</th>
                     <th scope="col">Class</th>
                     <th scope="col">Group</th>
                     <th scope="col">Section</th>
@@ -34,7 +34,7 @@
                       <td>{{$student->office->class}}</td>
                       <td>{{$student->office->group}}</td>
                       <td>{{$student->office->section}}</td>
-                      <td></td>
+                      <td><a href="{{route('student.view',$student->id)}}" class="btn btn-sm btn-primary">View Student</a></td>
                     </tr>
                   @endforeach
                 </thead>
@@ -45,4 +45,5 @@
       </div>
     </div>
   </div>
+
 @endsection

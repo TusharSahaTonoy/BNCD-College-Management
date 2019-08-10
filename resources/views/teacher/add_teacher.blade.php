@@ -13,7 +13,7 @@
             </div>
           </div>
           <div class="card-body px-lg-5 py-lg-5">
-            <form role="form" action="{{ route('teacher.add_teacher') }}" method="POST">
+            <form role="form" action="{{ route('teacher.add_teacher') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
                 <div class="input-group input-group-alternative mb-3">
@@ -36,9 +36,8 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"></span>
                   </div>
-                  <input type="hidden" name="type" value="teacher">
                   <select name="role" class="form-control" required>
-                    <option value="">Select Teacher Role</option>
+                    <option value="{{ (old('role')!=null)? old('role'): '' }}">{{ (old('role')!=null)? old('role'): 'Select a Role' }}</option>
                     <option value="principal">Principal</option>
                     <option value="vice_principal">Vice Principal</option>
                     <option value="co_odinator">Co-Odinator</option>
@@ -52,7 +51,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"></span>
                   </div>
-                  <input type="email" class="form-control" name="email" value=" {{ old('email') }}" placeholder="Email" >
+                  <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" >
                 </div>
               </div>
               <div class="form-group">
@@ -60,7 +59,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"></span>
                   </div>
-                  <input type="number" class="form-control" name="phone" value=" {{ old('phone') }}" placeholder="Phone" >
+                  <input type="number" class="form-control" name="phone" value="{{ old('phone') }}" placeholder="Phone" required >
                 </div>
               </div>
               <div class="form-group">
@@ -79,6 +78,13 @@
                   <input type="number" class="form-control" name="join_year" value="{{ old('join_year') }}" required placeholder="Join Year" >
                 </div>
               </div>
+
+              <div class="form-group">
+                <label> Image</label>
+                <input type="file" class="form-control form-control-alternative" name="teacher_image" required  onchange="document.getElementById('teacher_image').src = window.URL.createObjectURL(this.files[0])">
+                <img id="teacher_image" width="200px" />
+              </div>
+
               <div class="text-center">
                 <button type="submit" class="btn btn-primary mt-4">Save</button>
               </div>

@@ -64,7 +64,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text">Phone </span>
                   </div>
-                  <input type="number" class="form-control" name="phone" value=" {{$teacher->phone }}" readonly >
+                  <input type="number" class="form-control" name="phone" value="{{$teacher->phone}}" readonly >
                 </div>
               </div>
               <div class="form-group">
@@ -82,6 +82,10 @@
                   </div>
                   <input type="number" class="form-control" name="join_year" value="{{ $teacher->join_year}}" readonly >
                 </div>
+              </div>
+              <div class="form-group">
+                <label> Image</label>
+                <img id="teacher_image" src="{{ asset('/storage/teachers/'.$teacher->image) }}" width="200px" />
               </div>
           </div>
         </div>

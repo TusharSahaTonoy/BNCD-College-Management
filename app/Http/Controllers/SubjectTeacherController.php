@@ -59,7 +59,7 @@ class SubjectTeacherController extends Controller
         $sec_list = StuSchoolInfo::select('section')->where([
             'class'=>$class,
             'group'=> ($group==null)? null : $group
-            ])->get();
+            ])->groupBy('section')->get();
         
         foreach($sec_list as $sec)
         {
